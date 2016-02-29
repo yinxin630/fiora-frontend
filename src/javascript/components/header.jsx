@@ -5,10 +5,8 @@ import { Link } from 'react-router';
 
 const BackgroundColor = '#272727';
 const AppNameColor = '#FFFFFF';
-const LinkColor = '#FFFFFF';
-const aStyle = {
+const LinkStyle = {
     marginLeft: '10px',
-    color: LinkColor,
 };
 const partitionStyle = {
     marginLeft: 40,
@@ -39,22 +37,14 @@ export default class Header extends React.Component {
                         display: 'flex',
                         alignItems: 'center',
                     }}>
-                        <a style={ aStyle }>
-                            <Link to="/">首页</Link>
-                        </a>
+                        <Link style={LinkStyle} to="/">首页</Link>
                         <div style={ partitionStyle }/>
-                        <a style={ aStyle }>
-                            <Link to="/register">注册</Link>
-                        </a>
+                        <Link style={LinkStyle} to="/register">注册</Link>
                         {
                             isLogged ?
-                            <a style={ aStyle } onClick={ e => handleLogout() }>
-                                <Link to="/">注销</Link>
-                            </a>
+                            <Link style={LinkStyle} to="/" onClick={ e => handleLogout() }>注销</Link>
                             :
-                            <a style={ aStyle }>
-                                <Link to="/login">登录</Link>
-                            </a>
+                            <Link style={LinkStyle} to="/login">登录</Link>
                         }
                     </nav>
                 </div>

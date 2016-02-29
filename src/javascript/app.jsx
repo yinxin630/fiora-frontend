@@ -54,6 +54,7 @@ export default class App extends React.Component {
     handleRegister (username, password, component) {
         io.socket.post('/user', {username: username, password}, (result, jwr) => {
             if (jwr.statusCode === 201) {
+                alert('注册成功，请登录');
                 this.props.history.push('/login');
             }
             else {
@@ -66,7 +67,7 @@ export default class App extends React.Component {
         console.log('token', io.sails.token);
         const { user, linkmans, linkmanFocus } = this.props.reducer;
         
-        const Child = this.props.children.type;
+        const Child = this.props.children;
         const props = {
             Main: {
                 user,
@@ -89,7 +90,9 @@ export default class App extends React.Component {
                 flexDirection: 'column',
             }}>
                 <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ io.sails.token !== undefined && io.sails.token !== null }/>
-                { React.createElement(Child, props[Child.name]) }
+                {
+                    Child && React.cloneElement(Child, props[Child.type.name])
+                }
             </div>
         );
     }

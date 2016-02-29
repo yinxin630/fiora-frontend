@@ -74,7 +74,7 @@ export default class Register extends React.Component {
                             <Input type="password" icon="lock" placeholder="重复密码" ref="confirmPassword" validation={ this.state.confirmPassword }/>
                         </fieldset>
                         <Input 
-                            type="submit" 
+                            type="button" 
                             value="提交" 
                             amStyle="primary" 
                             block 
