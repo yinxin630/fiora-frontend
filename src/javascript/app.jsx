@@ -65,7 +65,13 @@ export default class App extends React.Component {
     }
     
     componentWillMount () {
-        io.sails.token = window.sessionStorage.getItem('token');
+        let token = window.sessionStorage.getItem('token');
+        io.socket.get('/auth', {token}, (result, jwr) => {
+            if (jwr.statusCode === 200) {
+                io.sails.token = token;
+                this.props.history.push('/');
+            }
+        });
     }
     
     render() {
