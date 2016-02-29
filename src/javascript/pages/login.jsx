@@ -6,33 +6,32 @@ import { Form, fieldset, Input, Button } from 'amazeui-react';
 
 export default class Login extends React.Component {
     checkValue () {
+        this.setState({
+            username: undefined,
+            password: undefined,
+            confirmPassword: undefined,
+        });
+        this.refs.info.innerText = '';
+        
         if (this.refs.username.getValue() === "") {
             this.refs.info.innerText = '请输入用户名';
             this.setState({username: 'error'});
             return false;
         } 
-        else {
-            this.setState({username: ''});
-        }
         
         if (this.refs.password.getValue() === "") {
             this.refs.info.innerText = '请输入密码';
             this.setState({password: 'error'});
             return false;
         } 
-        else {
-            this.setState({password: ''});
-        }
-        
-        this.refs.info.innerText = '';
         return true;
     }
     
     constructor (props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            username: undefined,
+            password: undefined,
         };
     }
     

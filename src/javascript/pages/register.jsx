@@ -6,32 +6,30 @@ import { Form, fieldset, Input, Button } from 'amazeui-react';
 
 export default class Register extends React.Component {
     checkValue () {
+        this.setState({
+            username: undefined,
+            password: undefined,
+            confirmPassword: undefined,
+        });
+        this.refs.info.innerText = '';
+        
         if (this.refs.username.getValue() === "") {
             this.refs.info.innerText = '请输入用户名';
             this.setState({username: 'error'});
             return false;
         } 
-        else {
-            this.setState({username: ''});
-        }
         
         if (this.refs.password.getValue() === "") {
             this.refs.info.innerText = '请输入密码';
             this.setState({password: 'error'});
             return false;
         } 
-        else {
-            this.setState({password: ''});
-        }
         
         if (this.refs.confirmPassword.getValue() === "") {
             this.refs.info.innerText = '请输入重复密码';
             this.setState({confirmPassword: 'error'});
             return false;
         } 
-        else {
-            this.setState({confirmPassword: ''});
-        }
         
         if (this.refs.password.getValue() !== this.refs.confirmPassword.getValue()) {
             this.refs.info.innerText = '密码与重复密码不一致';
@@ -39,17 +37,15 @@ export default class Register extends React.Component {
             this.setState({confirmPassword: 'error'});
             return false;
         } 
-        
-        this.refs.info.innerText = '';
         return true;
     }
     
     constructor (props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
-            confirmPassword: '',
+            username: undefined,
+            password: undefined,
+            confirmPassword: undefined,
         };
     }
     
