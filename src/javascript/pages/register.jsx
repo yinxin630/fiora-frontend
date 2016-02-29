@@ -12,7 +12,7 @@ export default class Register extends React.Component {
             return false;
         } 
         else {
-            this.setState({username: 'success'});
+            this.setState({username: ''});
         }
         
         if (this.refs.password.getValue() === "") {
@@ -21,7 +21,7 @@ export default class Register extends React.Component {
             return false;
         } 
         else {
-            this.setState({password: 'success'});
+            this.setState({password: ''});
         }
         
         if (this.refs.confirmPassword.getValue() === "") {
@@ -30,7 +30,7 @@ export default class Register extends React.Component {
             return false;
         } 
         else {
-            this.setState({confirmPassword: 'success'});
+            this.setState({confirmPassword: ''});
         }
         
         if (this.refs.password.getValue() !== this.refs.confirmPassword.getValue()) {
@@ -46,6 +46,8 @@ export default class Register extends React.Component {
         super(props);
         this.state = {
             username: '',
+            password: '',
+            confirmPassword: '',
         };
     }
     

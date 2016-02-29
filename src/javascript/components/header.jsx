@@ -16,6 +16,8 @@ const partitionStyle = {
 
 export default class Header extends React.Component {
     render () {
+        const { handleLogout, isLogged } = this.props;
+        
         return (
             <div style={{
                 backgroundColor: BackgroundColor,
@@ -44,9 +46,16 @@ export default class Header extends React.Component {
                         <a style={ aStyle }>
                             <Link to="/register">注册</Link>
                         </a>
-                        <a style={ aStyle }>
-                            <Link to="/login">登录</Link>
-                        </a>
+                        {
+                            isLogged ?
+                            <a style={ aStyle } onClick={ e => handleLogout() }>
+                                <Link to="/">注销</Link>
+                            </a>
+                            :
+                            <a style={ aStyle }>
+                                <Link to="/login">登录</Link>
+                            </a>
+                        }
                     </nav>
                 </div>
             </div>
