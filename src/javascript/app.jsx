@@ -27,6 +27,7 @@ export default class App extends React.Component {
         io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
                 if (jwr.statusCode === 201) {
                     io.sails.token = result.token;
+                    window.sessionStorage.setItem('token', result.token);
                     this.props.history.push('/');
                 }
                 else {
@@ -63,6 +64,10 @@ export default class App extends React.Component {
         });
     }
     
+    componentWillMount () {
+        io.sails.token = window.sessionStorage.getItem('token');
+    }
+    
     render() {
         console.log('token', io.sails.token);
         const { user, linkmans, linkmanFocus } = this.props.reducer;
@@ -91,7 +96,7 @@ export default class App extends React.Component {
             }}>
                 <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ io.sails.token !== undefined && io.sails.token !== null }/>
                 {
-                    Child && React.cloneElement(Child, props[Child.props.route.page])
+                    Child && React.cloneElement(Child, props[Child.props.route.page || Child.props.route.path])
                 }
             </div>
         );
