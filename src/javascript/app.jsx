@@ -69,16 +69,16 @@ export default class App extends React.Component {
         
         const Child = this.props.children;
         const props = {
-            Main: {
+            main: {
                 user,
                 linkmans,
                 linkmanFocus,
                 handleLinkmanClick: this.handleLinkmanClick.bind(this),
             },
-            Register: {
+            register: {
                 handleRegister: this.handleRegister.bind(this),
             },
-            Login: {
+            login: {
                 handleLogin: this.handleLogin.bind(this),
             }
         }
@@ -91,7 +91,7 @@ export default class App extends React.Component {
             }}>
                 <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ io.sails.token !== undefined && io.sails.token !== null }/>
                 {
-                    Child && React.cloneElement(Child, props[Child.type.name])
+                    Child && React.cloneElement(Child, props[Child.props.route.page])
                 }
             </div>
         );
@@ -104,7 +104,7 @@ ReactDom.render(
     <Provider store={ Store }>
         <Router history={ browserHistory }>
             <Route path="/" component={ ConnectedApp }>
-                <IndexRoute page="Main" component={ Main }/>
+                <IndexRoute page="main" component={ Main }/>
                 <Route path="register" component={ Register }/>
                 <Route path="login" component={ Login }/>
             </Route>

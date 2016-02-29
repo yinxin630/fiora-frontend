@@ -47,8 +47,8 @@ export default class Body extends React.Component {
             }}>
                 <Sidebar>
                     <User 
-                        nickname={ this.props.user.nickname }
-                        avatar={ this.props.user.avatar }
+                        nickname={ user.nickname }
+                        avatar={ user.avatar }
                     />
                     <nav 
                         style={{

@@ -2,7 +2,7 @@
 
 const React = require('react');
 import Header from '../components/header.jsx';
-import { Form, fieldset, Input } from 'amazeui-react';
+import { Form, fieldset, Input, Button } from 'amazeui-react';
 
 export default class Register extends React.Component {
     checkValue () {
@@ -35,6 +35,8 @@ export default class Register extends React.Component {
         
         if (this.refs.password.getValue() !== this.refs.confirmPassword.getValue()) {
             this.refs.info.innerText = '密码与重复密码不一致';
+            this.setState({password: 'error'});
+            this.setState({confirmPassword: 'error'});
             return false;
         } 
         
@@ -73,9 +75,7 @@ export default class Register extends React.Component {
                             <Input type="password" icon="lock" placeholder="密码" ref="password" validation={ this.state.password }/>
                             <Input type="password" icon="lock" placeholder="重复密码" ref="confirmPassword" validation={ this.state.confirmPassword }/>
                         </fieldset>
-                        <Input 
-                            type="button" 
-                            value="提交" 
+                        <Button 
                             amStyle="primary" 
                             block 
                             onClick={ e => {
@@ -84,7 +84,7 @@ export default class Register extends React.Component {
                                 }
                                 handleRegister(this.refs.username.getValue(), this.refs.password.getValue(), this);
                             }}
-                        />
+                        >注册</Button>
                     </Form>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 const React = require('react');
 import Header from '../components/header.jsx';
-import { Form, fieldset, Input } from 'amazeui-react';
+import { Form, fieldset, Input, Button } from 'amazeui-react';
 
 export default class Login extends React.Component {
     checkValue () {
@@ -56,9 +56,7 @@ export default class Login extends React.Component {
                             <Input placeholder="用户名" icon="user" ref="username" validation={ this.state.username }/>
                             <Input type="password" icon="lock" placeholder="密码" ref="password" validation={ this.state.password }/>
                         </fieldset>
-                        <Input 
-                            type="button" 
-                            value="登录" 
+                        <Button 
                             amStyle="primary" 
                             block 
                             onClick={ e => {
@@ -67,7 +65,7 @@ export default class Login extends React.Component {
                                 }
                                 handleLogin(this.refs.username.getValue(), this.refs.password.getValue(), this);
                             }}
-                         />
+                         >登录</Button>
                     </Form>
                 </div>
             </div>
