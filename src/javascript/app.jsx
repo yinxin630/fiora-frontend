@@ -64,6 +64,13 @@ export default class App extends React.Component {
         });
     }
     
+    constructor (props) {
+        super(props);
+        this.state = {
+            height: window.innerHeight,
+        }
+    }
+    
     componentWillMount () {
         let token = window.sessionStorage.getItem('token');
         io.socket.get('/auth', {token}, (result, jwr) => {
@@ -71,6 +78,12 @@ export default class App extends React.Component {
                 io.sails.token = token;
                 this.props.history.push('/');
             }
+        });
+    }
+    
+    componentDidMount () {
+        window.addEventListener('resize', () => {
+            this.setState({height: window.innerHeight});
         });
     }
     
@@ -96,7 +109,7 @@ export default class App extends React.Component {
         
         return (
             <div style={{
-                height: window.innerHeight,
+                height: this.state.height,
                 display: 'flex',
                 flexDirection: 'column',
             }}>
