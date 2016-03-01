@@ -45,10 +45,10 @@ export default class Linkman extends React.Component {
                         alignItems: 'center',
                     }}>
                         <div style={{
-                            fontSize: '1.4rem',
+                            fontSize: '1.2rem',
                         }}>{ this.props.nickname }</div>
                         <div style={{
-                            fontSize: '0.6rem',
+                            fontSize: '1rem',
                             color: '#687275',
                         }}>{ this.props.time }</div>
                     </div>
