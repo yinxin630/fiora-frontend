@@ -29,6 +29,13 @@ export default class App extends React.Component {
                     io.sails.token = result.token;
                     window.sessionStorage.setItem('token', result.token);
                     this.props.history.push('/');
+                    
+                    io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
+                        if (jwr.statusCode === 200) {
+                            return this.props.dispatch(Action.setUser(result));
+                        }
+                        this.props.dispatch(Action.setUser(undefined));
+                    });
                 }
                 else {
                     if (result.msg.match(/user.*not exists/)) {
@@ -41,14 +48,16 @@ export default class App extends React.Component {
                     }
                     component.refs.info.innerText = msg;
                 }
+                this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 201));
             }
         );
     }
     
     handleLogout () {
         io.socket.delete('/auth', {token: io.sails.token}, (result, jwr) => {
+            this.props.dispatch(Action.setLoginStatus(false));
+            this.props.dispatch(Action.setUser(undefined));
             io.sails.token = null;
-            this.props.history.push('/');
         });
     }
     
@@ -76,8 +85,15 @@ export default class App extends React.Component {
         io.socket.get('/auth', {token}, (result, jwr) => {
             if (jwr.statusCode === 200) {
                 io.sails.token = token;
-                this.props.history.push('/');
+                
+                io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
+                    if (jwr.statusCode === 200) {
+                        return this.props.dispatch(Action.setUser(result));
+                    }
+                    this.props.dispatch(Action.setUser(undefined));
+                })
             }
+            this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 200));
         });
     }
     
@@ -89,7 +105,7 @@ export default class App extends React.Component {
     
     render() {
         console.log('token', io.sails.token);
-        const { user, linkmans, linkmanFocus } = this.props.reducer;
+        const { user, linkmans, linkmanFocus, isLogged } = this.props.reducer;
         
         const Child = this.props.children;
         const props = {
@@ -113,7 +129,7 @@ export default class App extends React.Component {
                 display: 'flex',
                 flexDirection: 'column',
             }}>
-                <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ io.sails.token !== undefined && io.sails.token !== null }/>
+                <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ isLogged }/>
                 {
                     Child && React.cloneElement(Child, props[Child.props.route.page || Child.props.route.path])
                 }

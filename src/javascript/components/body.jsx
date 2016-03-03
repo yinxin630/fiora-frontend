@@ -1,6 +1,7 @@
 'use strict'
 
 const React = require('react');
+const Default = require('../default.js');
 
 import Linkman from './linkman.jsx';
 import LinkmanForm from './linkmanForm.jsx';
@@ -38,7 +39,9 @@ export default class Body extends React.Component {
     }
     
     render () {
-        const { user, linkmans, linkmanFocus } = this.props;
+        let { user, linkmans } = this.props;
+        user = user || Default.user;
+        linkmans = linkmans || Default.linkmans
         
         return (
             <div style={{
@@ -60,14 +63,12 @@ export default class Body extends React.Component {
                 </Sidebar>
                 <LinkmanForm>
                     {
-                        this.props.linkmans.map((linkman, index) => {
+                        linkmans.map((linkman, index) => {
                             return <Linkman
                                 avatar={ linkman.avatar }
                                 nickname={ linkman.nickname }
                                 time={ linkman.messages[linkman.messages.length - 1].time }
                                 content={ linkman.messages[linkman.messages.length - 1].content }
-                                focus={ index === this.props.linkmanFocus }
-                                handleClick={ e => this.props.linkmanClick(index) }
                             />
                         })
                     }
@@ -78,10 +79,10 @@ export default class Body extends React.Component {
                     flexDirection: 'column',
                     backgroundColor: '#FDFFFF',
                 }}>
-                    { this.getTopbar(linkmans[linkmanFocus]) }
+                    { this.getTopbar(linkmans[-1]) }
                     <ChatForm>
                         {
-                            this.getMessages(this.props.linkmans[this.props.linkmanFocus], this.props.user.id)
+                            this.getMessages(linkmans[-1], 1)
                         }
                     </ChatForm>
                     <InputArea/>

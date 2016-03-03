@@ -5,9 +5,11 @@ module.exports = {
         AddLinkman: 'AddLinkman',
         AddMessage: 'AddMessage',
         SetLinkmanFocus: 'SetLinkmanFocus',
+        
+        SetLoginStatus: 'SetLoginStatus',
     },
     
-    initUserInfo: function (user) {
+    setUser: function (user) {
         return {
             type: this.types.SetUser,
             user: user,
@@ -39,6 +41,13 @@ module.exports = {
         return {
             type: this.types.SetLinkmanFocus,
             index: index,
+        }
+    },
+    
+    setLoginStatus: function (status) {
+        return {
+            type: this.types.SetLoginStatus,
+            status: status,
         }
     }
 }
