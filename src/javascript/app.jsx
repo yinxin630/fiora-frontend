@@ -15,6 +15,7 @@ import Header from './components/header.jsx';
 import Main from './pages/main.jsx';
 import Register from './pages/register.jsx';
 import Login from './pages/login.jsx';
+import Setting from './pages/setting.jsx';
 
 io.sails.url = 'http://localhost:1337';
 
@@ -73,6 +74,16 @@ export default class App extends React.Component {
         });
     }
     
+    handleSetting (nickname, avatar) {
+        io.socket.put('/user/0', {token: io.sails.token, nickname, avatar}, (result, jwr) => {
+            if (jwr.statusCode === 200) {
+                this.props.history.push('/');
+                return this.props.dispatch(Action.setUser(result));
+            }
+            this.props.dispatch(Action.setUser(undefined));
+        });
+    }
+    
     constructor (props) {
         super(props);
         this.state = {
@@ -120,6 +131,9 @@ export default class App extends React.Component {
             },
             login: {
                 handleLogin: this.handleLogin.bind(this),
+            },
+            setting: {
+                handleSetting: this.handleSetting.bind(this),
             }
         }
         
@@ -147,6 +161,7 @@ ReactDom.render(
                 <IndexRoute page="main" component={ Main }/>
                 <Route path="register" component={ Register }/>
                 <Route path="login" component={ Login }/>
+                <Route path="setting" component={ Setting }/>
             </Route>
         </Router>
     </Provider>, 

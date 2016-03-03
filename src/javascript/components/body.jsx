@@ -1,6 +1,7 @@
 'use strict'
 
 const React = require('react');
+import { Link } from 'react-router';
 const Default = require('../default.js');
 
 import Linkman from './linkman.jsx';
@@ -59,6 +60,7 @@ export default class Body extends React.Component {
                             marginTop: '100px',
                         }}
                     >
+                        <Link to="setting">设置</Link>
                     </nav>
                 </Sidebar>
                 <LinkmanForm>
