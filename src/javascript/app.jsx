@@ -84,13 +84,27 @@ export default class App extends React.Component {
         });
     }
     
-    constructor (props) {
-        super(props);
+    handleSend (message) {
+        console.log(message);
+        io.socket.post('/message', {
+                token: io.sails.token,
+                from: this.props.reducer.user.id,
+                to: 0,
+                content: message,
+            }, (result, jwr) => {
+                console.log(result);
+                console.log(jwr);
+            }
+        );
+    }
+    
+    constructor (props, context) {
+        super(props, context);
         this.state = {
             height: window.innerHeight,
         }
     }
-    
+ 
     componentWillMount () {
         let token = window.sessionStorage.getItem('token');
         io.socket.get('/auth', {token}, (result, jwr) => {
@@ -105,6 +119,10 @@ export default class App extends React.Component {
                 })
             }
             this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 200));
+        });
+        
+        io.socket.on('message', result => {
+            console.log(result);
         });
     }
     
@@ -125,6 +143,7 @@ export default class App extends React.Component {
                 linkmans,
                 linkmanFocus,
                 handleLinkmanClick: this.handleLinkmanClick.bind(this),
+                handleSend: this.handleSend.bind(this),
             },
             register: {
                 handleRegister: this.handleRegister.bind(this),
