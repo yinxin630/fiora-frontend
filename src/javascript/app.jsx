@@ -20,8 +20,8 @@ import Setting from './pages/setting.jsx';
 io.sails.url = 'http://localhost:1337';
 
 export default class App extends React.Component {
-    handleLinkmanClick (index) {
-        this.props.dispatch(Action.setLinkmanFocus(index));
+    handleLinkmanClick (user) {
+        this.props.dispatch(Action.setCurrentLinkman(user));
     }
     
     handleLogin (username, password, component) {
@@ -33,7 +33,9 @@ export default class App extends React.Component {
                     
                     io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
                         if (jwr.statusCode === 200) {
-                            return this.props.dispatch(Action.setUser(result));
+                            this.props.dispatch(Action.setUser(result));
+                            this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                            return;
                         }
                         this.props.dispatch(Action.setUser(undefined));
                     });
@@ -65,7 +67,6 @@ export default class App extends React.Component {
     handleRegister (username, password, component) {
         io.socket.post('/user', {username: username, password}, (result, jwr) => {
             if (jwr.statusCode === 201) {
-                alert('注册成功，请登录');
                 this.props.history.push('/login');
             }
             else {
@@ -84,16 +85,18 @@ export default class App extends React.Component {
         });
     }
     
-    handleSend (message) {
-        console.log(message);
+    handleSend (message, linkman) {
+        if (message === '') {
+            return;
+        }
         io.socket.post('/message', {
                 token: io.sails.token,
                 from: this.props.reducer.user.id,
-                to: 0,
+                to: linkman.id,
                 content: message,
             }, (result, jwr) => {
-                console.log(result);
-                console.log(jwr);
+                // console.log(result);
+                // console.log(jwr);
             }
         );
     }
@@ -113,7 +116,9 @@ export default class App extends React.Component {
                 
                 io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
                     if (jwr.statusCode === 200) {
-                        return this.props.dispatch(Action.setUser(result));
+                        this.props.dispatch(Action.setUser(result));
+                        this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                        return;
                     }
                     this.props.dispatch(Action.setUser(undefined));
                 })
@@ -123,6 +128,7 @@ export default class App extends React.Component {
         
         io.socket.on('message', result => {
             console.log(result);
+            this.props.dispatch(Action.addGroupMessage(result.toGroup, result));
         });
     }
     
@@ -133,15 +139,15 @@ export default class App extends React.Component {
     }
     
     render() {
+        console.log(this.props.reducer.user);
         console.log('token', io.sails.token);
-        const { user, linkmans, linkmanFocus, isLogged } = this.props.reducer;
+        let { user, currentLinkman, isLogged } = this.props.reducer;
         
         const Child = this.props.children;
         const props = {
             main: {
                 user,
-                linkmans,
-                linkmanFocus,
+                currentLinkman: currentLinkman,
                 handleLinkmanClick: this.handleLinkmanClick.bind(this),
                 handleSend: this.handleSend.bind(this),
             },

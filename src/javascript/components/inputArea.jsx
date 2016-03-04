@@ -17,6 +17,7 @@ export default class InputArea extends React.Component {
             <div style={{
                 height: 80,
                 display: 'flex',
+                minHeight: 'min-content',
             }}>
                 <textarea style={{
                     flex: 1,

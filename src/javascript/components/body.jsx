@@ -8,41 +8,14 @@ import Linkman from './linkman.jsx';
 import LinkmanForm from './linkmanForm.jsx';
 import User from './user.jsx';
 import Sidebar from './sidebar.jsx';
-import Topbar from './topbar.jsx';
-import Message from './message.jsx';
-import ChatForm from './chatForm.jsx';
-import InputArea from './inputArea.jsx';
+import CurrentLinkman from './currentLinkman.jsx';
 
 export default class Body extends React.Component {
-    getMessages (linkman, userId) {
-        if (!linkman) {
-            return;
-        }
-        return linkman.messages.map(message => {
-            return <Message
-                avatar={ linkman.avatar }
-                nickname={ linkman.nickname }
-                time={ message.time }
-                content={ message.content }
-                align={ linkman.id === userId ? 'right' : 'left' }
-            />
-        });
-    }
-    
-    getTopbar (linkman) {
-        if (!linkman) {
-            return <Topbar noNickname={ true }/>
-        }
-        return <Topbar
-            avatar={ linkman.avatar }
-            nickname={ linkman.nickname }
-        />
-    }
-    
     render () {
-        let { user, linkmans } = this.props;
+        const { handleSend, handleLinkmanClick } = this.props;
+        let { user, currentLinkman } = this.props;
         user = user || Default.user;
-        linkmans = linkmans || Default.linkmans
+        currentLinkman = currentLinkman || Default.currentLinkman;
         
         return (
             <div style={{
@@ -65,30 +38,20 @@ export default class Body extends React.Component {
                 </Sidebar>
                 <LinkmanForm>
                     {
-                        linkmans.map((linkman, index) => {
+                        
+                        user.groups.map((group) => {
                             return <Linkman
-                                avatar={ linkman.avatar }
-                                nickname={ linkman.nickname }
-                                time={ linkman.messages[linkman.messages.length - 1].time }
-                                content={ linkman.messages[linkman.messages.length - 1].content }
+                                avatar={ group.avatar }
+                                nickname={ group.name }
+                                time=""
+                                content=""
+                                handleClick={ () => handleLinkmanClick(group) }
                             />
                         })
+                        
                     }
                 </LinkmanForm>
-                <div style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    backgroundColor: '#FDFFFF',
-                }}>
-                    { this.getTopbar(linkmans[-1]) }
-                    <ChatForm>
-                        {
-                            this.getMessages(linkmans[-1], 1)
-                        }
-                    </ChatForm>
-                    <InputArea/>
-                </div>
+                <CurrentLinkman me={ user.id } user={ currentLinkman } handleSend={ handleSend }/>
             </div>
         )
     }

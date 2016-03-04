@@ -1,12 +1,9 @@
 module.exports = {
     types: {
         SetUser: 'SetUser',
-        SetLinkmans: 'SetLinkmans',
-        AddLinkman: 'AddLinkman',
-        AddMessage: 'AddMessage',
-        SetLinkmanFocus: 'SetLinkmanFocus',
-        
+        SetCurrentLinkman: 'SetCurrentLinkman',
         SetLoginStatus: 'SetLoginStatus',
+        AddGroupMessage: 'AddGroupMessage',
     },
     
     setUser: function (user) {
@@ -16,31 +13,10 @@ module.exports = {
         };
     },
     
-    setLinkmans: function (linkmans) {
+    setCurrentLinkman: function (user) {
         return {
-            type: this.types.SetLinkmans,
-            linkmans: linkmans,
-        };
-    },
-    
-    addLinkman: function (linkman) {
-        return {
-            type: this.types.AddLinkman,
-            lickman: linkman,
-        }
-    },
-    
-    addMessage: function (userId, message) {
-        return {
-            type: this.types.AddMessage,
-            message: message,
-        }
-    },
-    
-    setLinkmanFocus: function (index) {
-        return {
-            type: this.types.SetLinkmanFocus,
-            index: index,
+            type: this.types.SetCurrentLinkman,
+            user: user,
         }
     },
     
@@ -48,6 +24,14 @@ module.exports = {
         return {
             type: this.types.SetLoginStatus,
             status: status,
+        }
+    },
+    
+    addGroupMessage: function (group, message) {
+        return {
+            type: this.types.AddGroupMessage,
+            group: group,
+            message: message,
         }
     }
 }

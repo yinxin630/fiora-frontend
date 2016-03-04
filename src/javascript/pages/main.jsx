@@ -10,14 +10,13 @@ export default class Main extends React.Component {
     }
     
     render () {
-        const { user, linkmans, linkmanFocus } = this.props;
+        let { user, currentLinkman } = this.props;
         const { handleLinkmanClick, handleSend } = this.props;
         return (
             <Body
                 user={ user } 
-                linkmans={ linkmans }
-                linkmanFocus={ linkmanFocus }
-                linkmanClick={ handleLinkmanClick }
+                currentLinkman={ currentLinkman }
+                handleLinkmanClick={ handleLinkmanClick }
                 handleSend={ handleSend }
             />
         );
