@@ -8,6 +8,11 @@ function reducer(state = {}, action) {
         case Action.types.SetUser: {
             return Object.assign({}, state, {user: action.user});
         }
+        case Action.types.SetUserInfo: {
+            state.user.nickname = action.user.nickname;
+            state.user.avatar = action.user.avatar;
+            return Object.assign({}, state);
+        }
         case Action.types.SetCurrentLinkman: {
             state.currentLinkman = action.user;
             return Object.assign({}, state);

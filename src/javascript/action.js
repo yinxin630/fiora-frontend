@@ -1,6 +1,7 @@
 module.exports = {
     types: {
         SetUser: 'SetUser',
+        SetUserInfo: 'SetUserInfo',
         SetCurrentLinkman: 'SetCurrentLinkman',
         SetLoginStatus: 'SetLoginStatus',
         AddGroupMessage: 'AddGroupMessage',
@@ -11,6 +12,13 @@ module.exports = {
             type: this.types.SetUser,
             user: user,
         };
+    },
+    
+    setUserInfo: function (user) {
+        return {
+            type: this.types.SetUserInfo,
+            user: user,
+        }
     },
     
     setCurrentLinkman: function (user) {

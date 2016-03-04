@@ -2,6 +2,7 @@
 
 const React = require('react');
 import { Image } from 'amazeui-react';
+const Moment = require('moment');
 
 export default class Message extends React.Component {
     static defaultProps = {
@@ -42,7 +43,7 @@ export default class Message extends React.Component {
                             marginLeft: 5,
                             fontSize: '1rem',
                         }}>
-                            { this.props.time }
+                            { Moment(this.props.time).format('MM/DD hh:mm:ss A') }
                         </span>
                     </div>
                     <div

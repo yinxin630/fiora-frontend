@@ -61,6 +61,7 @@ export default class App extends React.Component {
             this.props.dispatch(Action.setLoginStatus(false));
             this.props.dispatch(Action.setUser(undefined));
             io.sails.token = null;
+            window.location.reload();
         });
     }
     
@@ -79,7 +80,7 @@ export default class App extends React.Component {
         io.socket.put('/user/0', {token: io.sails.token, nickname, avatar}, (result, jwr) => {
             if (jwr.statusCode === 200) {
                 this.props.history.push('/');
-                return this.props.dispatch(Action.setUser(result));
+                return this.props.dispatch(Action.setUserInfo(result));
             }
             this.props.dispatch(Action.setUser(undefined));
         });
@@ -127,7 +128,6 @@ export default class App extends React.Component {
         });
         
         io.socket.on('message', result => {
-            console.log(result);
             this.props.dispatch(Action.addGroupMessage(result.toGroup, result));
         });
     }
@@ -139,8 +139,6 @@ export default class App extends React.Component {
     }
     
     render() {
-        console.log(this.props.reducer.user);
-        console.log('token', io.sails.token);
         let { user, currentLinkman, isLogged } = this.props.reducer;
         
         const Child = this.props.children;
