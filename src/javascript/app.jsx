@@ -18,6 +18,7 @@ import Register from './pages/register.jsx';
 import Login from './pages/login.jsx';
 import Setting from './pages/setting.jsx';
 import Source from './pages/source.jsx';
+import Comment from './pages/comment.jsx';
 
 io.sails.url = 'http://localhost:1337';
 
@@ -156,6 +157,7 @@ export default class App extends React.Component {
         
         window.onfocus = () => this.props.dispatch(Action.setWindowVisible(true));
         window.onblur = () => this.props.dispatch(Action.setWindowVisible(false));
+        this.props.dispatch(Action.setWindowVisible(true));
         
         if (notify.permissionLevel() === notify.PERMISSION_DEFAULT) {
             notify.requestPermission();
@@ -217,6 +219,7 @@ ReactDom.render(
                 <Route path="login" component={ Login }/>
                 <Route path="setting" component={ Setting }/>
                 <Route path="source" component={ Source }/>
+                <Route path="comment" component={ Comment }/>
             </Route>
         </Router>
     </Provider>, 

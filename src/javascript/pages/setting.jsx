@@ -1,7 +1,6 @@
 'use strict'
 
 const React = require('react');
-import Header from '../components/header.jsx';
 import { Form, fieldset, Input, Button } from 'amazeui-react';
 
 export default class Setting extends React.Component {
