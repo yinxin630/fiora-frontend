@@ -136,19 +136,26 @@ export default class App extends React.Component {
         });
         
         io.socket.on('message', result => {
-            let notification = notify.createNotification(result.from.nickname, {
-                icon: result.from.avatar,
-                body: result.content.slice(0, 60),
-                tag: result.from.id,
-            });
+            if (!this.props.reducer.windowVisible) {
+                let notification = notify.createNotification(result.from.nickname, {
+                    icon: result.from.avatar,
+                    body: result.content.slice(0, 60),
+                    tag: result.from.id,
+                });
+            }
             this.props.dispatch(Action.addGroupMessage(result.toGroup, result));
         });
+        
+        
     }
     
     componentDidMount () {
         window.addEventListener('resize', () => {
             this.setState({height: window.innerHeight});
         });
+        
+        window.onfocus = () => this.props.dispatch(Action.setWindowVisible(true));
+        window.onblur = () => this.props.dispatch(Action.setWindowVisible(false));
         
         if (notify.permissionLevel() === notify.PERMISSION_DEFAULT) {
             notify.requestPermission();

@@ -27,6 +27,10 @@ function reducer(state = {}, action) {
             group.messages.push(action.message);
             return Object.assign({}, state);
         }
+        case Action.types.SetWindowVisible: {
+            state.windowVisible = action.status;
+            return Object.assign({}, state);
+        }
         default:
             return state;
     }

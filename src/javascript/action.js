@@ -5,6 +5,7 @@ module.exports = {
         SetCurrentLinkman: 'SetCurrentLinkman',
         SetLoginStatus: 'SetLoginStatus',
         AddGroupMessage: 'AddGroupMessage',
+        SetWindowVisible: 'SetWindowVisible',
     },
     
     setUser: function (user) {
@@ -40,6 +41,13 @@ module.exports = {
             type: this.types.AddGroupMessage,
             group: group,
             message: message,
+        }
+    },
+    
+    setWindowVisible: function (status) {
+        return {
+            type: this.types.SetWindowVisible,
+            status: status,
         }
     }
 }
