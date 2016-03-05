@@ -35,8 +35,6 @@ export default class Topbar extends React.Component {
                     <span>{ this.props.nickname }</span>
                 </div>
                 <div>
-                    <div style={{
-                    }} className="am-icon-md am-icon-gear"/>
                 </div>
             </div>
         );
