@@ -6,6 +6,7 @@ import { Provider, connect } from 'react-redux';
 const Action = require('./action.js');
 const Store = require('./store.js');
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+require('html5-desktop-notifications');
 
 const socketIOClient = require('socket.io-client');
 const sailsIOClient = require('sails.io.js');
@@ -135,6 +136,11 @@ export default class App extends React.Component {
         });
         
         io.socket.on('message', result => {
+            let notification = notify.createNotification(result.from.nickname, {
+                icon: result.from.avatar,
+                body: result.content.slice(0, 60),
+                tag: result.from.id,
+            });
             this.props.dispatch(Action.addGroupMessage(result.toGroup, result));
         });
     }
@@ -142,6 +148,17 @@ export default class App extends React.Component {
     componentDidMount () {
         window.addEventListener('resize', () => {
             this.setState({height: window.innerHeight});
+        });
+        
+        if (notify.permissionLevel() === notify.PERMISSION_DEFAULT) {
+            notify.requestPermission();
+        }
+        else if (notify.permissionLevel() === notify.PERMISSION_DENIED) {
+            alert('您已关闭了消息通知，如需桌面通知，请在浏览器设置中允许通知');
+        }
+        notify.config({
+            pageVisibility: true,
+            autoClose: 3000,
         });
     }
     
