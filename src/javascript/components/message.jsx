@@ -14,12 +14,18 @@ export default class Message extends React.Component {
     }
     
     render () {
+        let { align, avatar, nickname, time, content } = this.props;
+        content = content.replace(/\n|\r|(\r\n)|(\u0085)|(\u2028)|(\u0085\u2029)/g, '<br>');
+        content = content.replace(/ /g, '&nbsp');
+        content = content.replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp');
+        content = content.replace(/#\(.+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
+        
         return (
             <div style={{
                 margin: '0px 15px',
                 display: 'flex',
                 marginTop: 10,
-                flexDirection: this.props.align !== 'right' || 'row-reverse', 
+                flexDirection: align !== 'right' || 'row-reverse', 
             }}>
                     <Image src={ this.props.avatar }
                     width={40} height={40} circle
@@ -29,7 +35,7 @@ export default class Message extends React.Component {
                     maxWidth: '500px',
                     padding: '0px 10px',
                     display: 'flex',
-                    alignItems: this.props.align === 'left' ? 'flex-start' : 'flex-end',
+                    alignItems: align === 'left' ? 'flex-start' : 'flex-end',
                     flexDirection: 'column',
                 }}>
                     <div style={{
@@ -37,13 +43,13 @@ export default class Message extends React.Component {
                         <span style={{
                             fontSize: '1.4rem',
                         }}>
-                            { this.props.nickname }
+                            { nickname }
                         </span>
                         <span style={{
                             marginLeft: 5,
                             fontSize: '1rem',
                         }}>
-                            { Moment(this.props.time).format('MM/DD hh:mm:ss A') }
+                            { Moment(time).format('MM/DD hh:mm:ss A') }
                         </span>
                     </div>
                     <div
@@ -54,8 +60,7 @@ export default class Message extends React.Component {
                         boxShadow: '0px 0px 3px',
                         borderRadius: 10,
                         display: 'inline-block',
-                    }}>
-                        { this.props.content }
+                    }} dangerouslySetInnerHTML={ {__html: content} }>
                     </div>
                 </div>
             </div>

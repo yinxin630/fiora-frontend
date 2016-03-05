@@ -8,7 +8,7 @@ export default class ChatForm extends React.Component {
     }
     
     componentDidUpdate () {
-        let form = this.refs.chatform.getDOMNode()
+        let form = this.refs.chatform;
         let maxHeight = form.scrollHeight - form.clientHeight;
         if (form.scrollTop >= maxHeight - this.props.paddingBottom - (form.lastElementChild.offsetHeight) || 0) {
             form.scrollTop = maxHeight;
