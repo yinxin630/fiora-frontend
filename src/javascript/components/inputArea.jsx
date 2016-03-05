@@ -30,7 +30,7 @@ export default class InputArea extends React.Component {
                         e.preventDefault();
                         handleSend(message);
                     }
-                } }/>
+                } } maxLength="512"/>
                 <button style={{
                     width: 50,
                     height: 80,

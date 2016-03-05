@@ -16,7 +16,10 @@ export default class User extends React.Component {
                         width={80} height={80} circle
                     />
                 </div>
-                <span>{ this.props.nickname }</span>
+                <span style={{
+                    fontSize: '1.3rem',
+                    wordBreak: 'break-all',
+                }}>{ this.props.nickname }</span>
             </div>
         );
     }
