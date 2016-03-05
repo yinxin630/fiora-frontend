@@ -9,4 +9,5 @@ module.exports = {
     },
     isLogged: false,
     currentLinkman: undefined,
+    comments: [],
 }

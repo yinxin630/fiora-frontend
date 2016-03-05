@@ -111,6 +111,17 @@ export default class App extends React.Component {
         );
     }
     
+    handleComment (content) {
+        if (content === '') {
+            return;
+        }
+        io.socket.post('/comment', {token: io.sails.token, content}, (result, jwr) => {
+            if (jwr.statusCode === 200) {
+                alert('添加评论成功，谢谢参与！');
+            }
+        });
+    }
+    
     constructor (props, context) {
         super(props, context);
         this.state = {
@@ -134,6 +145,12 @@ export default class App extends React.Component {
                 })
             }
             this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 200));
+        });
+        
+        io.socket.get('/comment', {}, (result, jwr) => {
+            if (jwr.statusCode === 200) {
+                this.props.dispatch(Action.setComments(result));
+            }
         });
         
         io.socket.on('message', result => {
@@ -172,7 +189,7 @@ export default class App extends React.Component {
     }
     
     render() {
-        let { user, currentLinkman, isLogged } = this.props.reducer;
+        let { user, currentLinkman, isLogged, comments } = this.props.reducer;
         
         const Child = this.props.children;
         const props = {
@@ -190,6 +207,10 @@ export default class App extends React.Component {
             },
             setting: {
                 handleSetting: this.handleSetting.bind(this),
+            },
+            comment: {
+                handleComment: this.handleComment.bind(this),
+                comments,
             }
         }
         

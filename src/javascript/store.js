@@ -31,6 +31,10 @@ function reducer(state = {}, action) {
             state.windowVisible = action.status;
             return Object.assign({}, state);
         }
+        case Action.types.SetComments: {
+            state.comments = action.comments;
+            return Object.assign({}, state);
+        }
         default:
             return state;
     }

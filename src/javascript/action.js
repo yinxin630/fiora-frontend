@@ -6,6 +6,7 @@ module.exports = {
         SetLoginStatus: 'SetLoginStatus',
         AddGroupMessage: 'AddGroupMessage',
         SetWindowVisible: 'SetWindowVisible',
+        SetComments: 'SetComments',
     },
     
     setUser: function (user) {
@@ -48,6 +49,13 @@ module.exports = {
         return {
             type: this.types.SetWindowVisible,
             status: status,
+        }
+    },
+    
+    setComments: function (comments) {
+        return {
+            type: this.types.SetComments,
+            comments: comments,
         }
     }
 }
