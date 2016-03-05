@@ -10,7 +10,7 @@ const LinkStyle = {
     marginLeft: '10px',
 };
 const partitionStyle = {
-    marginLeft: 40,
+    marginLeft: 30,
 }
 
 export default class Header extends React.Component {
@@ -40,6 +40,7 @@ export default class Header extends React.Component {
                         alignItems: 'center',
                     }}>
                         <Link style={LinkStyle} to="/">首页</Link>
+                        <Link style={LinkStyle} to="/source">源码</Link>
                         <div style={ partitionStyle }/>
                         <Link style={LinkStyle} to="/register">注册</Link>
                         {

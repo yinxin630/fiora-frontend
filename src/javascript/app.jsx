@@ -16,6 +16,7 @@ import Main from './pages/main.jsx';
 import Register from './pages/register.jsx';
 import Login from './pages/login.jsx';
 import Setting from './pages/setting.jsx';
+import Source from './pages/source.jsx';
 
 io.sails.url = 'http://localhost:1337';
 
@@ -71,6 +72,12 @@ export default class App extends React.Component {
                 this.props.history.push('/login');
             }
             else {
+                if (result.msg === 'invalid username') {
+                    return component.refs.innerText = '用户名包含非法字符或者长度不合格';
+                }
+                else if (result.msg === 'invalid password') {
+                    return component.refs.innerText = '密码包含非法字符或者长度不合格';
+                }
                 component.refs.info.innerText = '注册失败，请重试';
             }
         });
@@ -185,6 +192,7 @@ ReactDom.render(
                 <Route path="register" component={ Register }/>
                 <Route path="login" component={ Login }/>
                 <Route path="setting" component={ Setting }/>
+                <Route path="source" component={ Source }/>
             </Route>
         </Router>
     </Provider>, 
