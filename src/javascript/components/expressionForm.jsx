@@ -21,6 +21,7 @@ export default class ExpressionForm extends React.Component {
                 display: 'flex',
                 flexWrap: 'wrap',
                 backgroundColor: '#FFFFFF',
+                boxShadow: '0px 0px 15px #666666',
             }}>
             {
                 expressions.map((e, index) => {

@@ -18,7 +18,7 @@ export default class Message extends React.Component {
         content = content.replace(/\n|\r|(\r\n)|(\u0085)|(\u2028)|(\u0085\u2029)/g, '<br>');
         content = content.replace(/ /g, '&nbsp');
         content = content.replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp');
-        content = content.replace(/#\(.+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
+        content = content.replace(/#\([\u4e00-\u9fa5]+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
         
         return (
             <div style={{
