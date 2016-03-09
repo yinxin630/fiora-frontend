@@ -33,7 +33,7 @@ export default class Body extends React.Component {
                             marginTop: '100px',
                         }}
                     >
-                        <Link to="setting">设置</Link>
+                        <Link to="setting">用户设置</Link>
                     </nav>
                 </Sidebar>
                 <LinkmanForm>
