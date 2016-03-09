@@ -41,8 +41,9 @@ export default class CurrentLinkman extends React.Component {
                 />
                 <ChatForm>
                 {
-                    user.messages.map(message => {
+                    user.messages.map((message, index) => {
                         return <Message
+                            key={ index }
                             avatar={ message.from.avatar }
                             nickname={ message.from.nickname }
                             time={ message.time }

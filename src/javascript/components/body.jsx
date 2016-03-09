@@ -38,9 +38,9 @@ export default class Body extends React.Component {
                 </Sidebar>
                 <LinkmanForm>
                     {
-                        
-                        user.groups.map((group) => {
+                        user.groups.map((group, index) => {
                             return <Linkman
+                                key={ index }
                                 avatar={ group.avatar }
                                 nickname={ group.name }
                                 time=""

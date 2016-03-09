@@ -27,7 +27,7 @@ export default class ExpressionForm extends React.Component {
             {
                 expressions.map((e, index) => {
                     return (
-                        <div style={{
+                        <div key={ index } style={{
                             width: 40,
                             height: 40,
                             padding: 5,

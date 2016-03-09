@@ -35,7 +35,7 @@ export default class Comment extends React.Component {
                     <PanelGroup accordion>
                         {
                             comments.map((comment, index, comments) => {
-                                return <Panel header={ `${comment.from.nickname || '游客'} ${Moment(comment.time).format('GGGG-MM-DD HH:mm:ss')}` } eventKey={ index }>{ comment.content }</Panel>
+                                return <Panel key={ index } header={ `${comment.from.nickname || '游客'} ${Moment(comment.time).format('GGGG-MM-DD HH:mm:ss')}` } eventKey={ index }>{ comment.content }</Panel>
                             })
                         }
                     </PanelGroup>
