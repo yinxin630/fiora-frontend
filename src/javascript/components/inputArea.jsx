@@ -1,6 +1,7 @@
 'use strict'
 
 const React = require('react');
+import ExpressionForm from './expressionForm.jsx';
 
 export default class InputArea extends React.Component {
     getMessage () {
@@ -15,33 +16,44 @@ export default class InputArea extends React.Component {
         
         return (
             <div style={{
-                height: 80,
-                display: 'flex',
+                height: 50,
                 minHeight: 'min-content',
+                margin: 'auto',
+                padding: 10,
             }}>
-                <textarea style={{
-                    flex: 1,
-                    padding: '5px 10px',
-                    fontSize: '1.4rem',
-                    color: '#5B5B5B',
-                }} ref="message" onKeyDown={ e => {
+                <ExpressionForm/>
+                <button style={{
+                    height: 30,
+                    width: 50,
+                    borderBottomLeftRadius: 15,
+                    borderTopLeftRadius: 15,
+                    backgroundColor: 'inherit',
+                    color: '#8E8E8E',
+                    border: '1px solid #e0e0e0',
+                }} className="am-icon-smile-o am-icon-md"></button>
+                <input type="text" style={{
+                    height: 30,
+                    width: 300,
+                    border: '1px solid #e0e0e0',
+                }} className="input-message" ref="message" onKeyDown={ e => {
                     if (e.keyCode === 13 && !e.shiftKey) {
                         let message = this.getMessage.bind(this)();
                         e.preventDefault();
                         handleSend(message);
                     }
-                } } maxLength="512"/>
+                } } maxLength={ 512 }/>
                 <button style={{
+                    height: 30,
                     width: 50,
-                    height: 80,
+                    borderBottomRightRadius: 15,
+                    borderTopRightRadius: 15,
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
+                    border: '1px solid #e0e0e0',
                 }} onClick={e => {
                     let message = this.getMessage.bind(this)();
                     handleSend(message);
-                }}>
-                    发送
-                </button>
+                }}>发送</button>
             </div>
         );
     }

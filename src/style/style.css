@@ -15,7 +15,7 @@ body {
     min-height: 600px;
 }
 
-textarea:focus {
+.input-message:focus {
     outline: none !important;
     border: none;
     box-shadow: 0 0 5px #719ECE;
