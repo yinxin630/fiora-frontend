@@ -10,6 +10,8 @@ const expressions = ['呵呵', '哈哈', '吐舌', '啊', '酷', '怒', '开心'
 
 export default class ExpressionForm extends React.Component {
     render () {
+        const { handleClick } = this.props;
+        
         return (
             <div style={{
                 width: 40 * 10,
@@ -29,7 +31,7 @@ export default class ExpressionForm extends React.Component {
                             padding: 5,
                             borderCollapse: 'collapse',
                             border: 'solid 1px #e3e3e3',
-                        }}>
+                        }} onClick={ () => handleClick(`#(${e})`) }>
                             <div style={{
                                 width: 30,
                                 height: 30,
