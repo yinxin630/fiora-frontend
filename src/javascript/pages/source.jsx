@@ -10,7 +10,8 @@ export default class Source extends React.Component {
                 textAlign: 'center',
                 paddingTop: 100,
             }}>
-                <label>版本：v1.0</label> <br/>
+                <label>版本：v1.0.1</label> <br/>
+                <label>添加了xss过滤</label> <br/>
                 <label>表情暂时需要手动输入，输入方式为：#(表情名称)</label> <br/>
                 <label>请注意符号为英文半角，支持贴吧基础表情，比如：#(滑稽)</label> <br/>
                 <br/>
