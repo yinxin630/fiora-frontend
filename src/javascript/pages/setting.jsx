@@ -22,7 +22,7 @@ export default class Setting extends React.Component {
                         }} ref="info">
                         </span>
                         <fieldset className="am-form-set">
-                            <Input type="text" placeholder="昵称" icon="user" ref="nickname" maxlength="10"/>
+                            <Input type="text" placeholder="昵称" icon="user" ref="nickname" maxLength={8}/>
                             <Input type="file" label="头像" id="avatar"/>
                             <Button amStyle="primary" block onClick={ e => {
                                 let avatar = document.querySelector('#avatar').files[0];

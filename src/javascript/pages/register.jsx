@@ -67,9 +67,9 @@ export default class Register extends React.Component {
                         }} ref="info">
                         </span>
                         <fieldset className="am-form-set">
-                            <Input placeholder="用户名" icon="user" ref="username" validation={ this.state.username }/>
-                            <Input type="password" icon="lock" placeholder="密码" ref="password" validation={ this.state.password }/>
-                            <Input type="password" icon="lock" placeholder="重复密码" ref="confirmPassword" validation={ this.state.confirmPassword }/>
+                            <Input placeholder="用户名" icon="user" ref="username" validation={ this.state.username } maxLength={ 26 }/>
+                            <Input type="password" icon="lock" placeholder="密码" ref="password" validation={ this.state.password } maxLength={ 26 }/>
+                            <Input type="password" icon="lock" placeholder="重复密码" ref="confirmPassword" validation={ this.state.confirmPassword } maxLength={ 26 }/>
                         </fieldset>
                         <Button 
                             amStyle="primary" 
