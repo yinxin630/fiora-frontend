@@ -40,6 +40,13 @@ export default class InputArea extends React.Component {
         return message;
     }
     
+    constructor (props, context) {
+        super(props, context);
+        this.state = {
+            isShow: false,
+        };
+    }
+    
     render () {
         const { handleSend } = this.props;
         
@@ -50,7 +57,7 @@ export default class InputArea extends React.Component {
                 margin: 'auto',
                 padding: 10,
             }}>
-                <ExpressionForm handleClick={ this.insertAtCursor.bind(this) }/>
+                <ExpressionForm isShow={ this.state.isShow } handleClick={ this.insertAtCursor.bind(this) }/>
                 <button style={{
                     height: 30,
                     width: 50,
@@ -59,18 +66,27 @@ export default class InputArea extends React.Component {
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
                     border: '1px solid #e0e0e0',
-                }} className="am-icon-smile-o am-icon-md"></button>
-                <input type="text" style={{
-                    height: 30,
-                    width: 300,
-                    border: '1px solid #e0e0e0',
-                }} className="input-message" ref="message" onKeyDown={ e => {
-                    if (e.keyCode === 13 && !e.shiftKey) {
-                        let message = this.getMessage.bind(this)();
-                        e.preventDefault();
-                        handleSend(message);
-                    }
-                } } maxLength={ 512 }/>
+                }} className="am-icon-smile-o am-icon-md"
+                    onClick={() => this.setState({isShow: !this.state.isShow})}
+                ></button>
+                <input 
+                    type="text" 
+                    style={{
+                        height: 30,
+                        width: 300,
+                        border: '1px solid #e0e0e0',
+                    }} 
+                    className="input-message"
+                    ref="message" 
+                    onKeyDown={ e => {
+                        if (e.keyCode === 13 && !e.shiftKey) {
+                            let message = this.getMessage.bind(this)();
+                            e.preventDefault();
+                            handleSend(message);
+                        }
+                    } } 
+                    maxLength={ 512 }
+                    onFocus={() => this.setState({isShow: false})}/>
                 <button style={{
                     height: 30,
                     width: 50,

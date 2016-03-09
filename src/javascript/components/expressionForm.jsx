@@ -11,6 +11,7 @@ const expressions = ['呵呵', '哈哈', '吐舌', '啊', '酷', '怒', '开心'
 export default class ExpressionForm extends React.Component {
     render () {
         const { handleClick } = this.props;
+        let { isShow } = this.props;
         
         return (
             <div style={{
@@ -18,7 +19,7 @@ export default class ExpressionForm extends React.Component {
                 height: 40 * 5,
                 position: 'absolute',
                 bottom: 50,
-                display: 'flex',
+                display: isShow ? 'flex' : 'none',
                 flexWrap: 'wrap',
                 backgroundColor: '#FFFFFF',
                 boxShadow: '0px 0px 15px #666666',
