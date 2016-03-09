@@ -7,6 +7,7 @@ const Action = require('./action.js');
 const Store = require('./store.js');
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 require('html5-desktop-notifications');
+const Config = require('../../config.js');
 
 const socketIOClient = require('socket.io-client');
 const sailsIOClient = require('sails.io.js');
@@ -20,7 +21,7 @@ import Setting from './pages/setting.jsx';
 import Source from './pages/source.jsx';
 import Comment from './pages/comment.jsx';
 
-io.sails.url = 'http://localhost:1337';
+io.sails.url = Config.server;
 
 export default class App extends React.Component {
     handleLinkmanClick (user) {

@@ -3,6 +3,7 @@
 const Static = require('koa-static');
 const Send = require('koa-send');
 const Koa = require('koa');
+const Config = require('./config.js');
 const app = Koa();
 
 // 静态资源处理
@@ -25,5 +26,5 @@ app.use(function *(){
     }
 });
 
-app.listen(3000);
+app.listen(Config.port);
 console.log('listening on port 3000');
