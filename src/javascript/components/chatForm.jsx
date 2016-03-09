@@ -16,8 +16,10 @@ export default class ChatForm extends React.Component {
     }
     
     componentDidMount () {
-        let form = this.refs.chatform;
-        form.scrollTop = form.scrollHeight;
+        setTimeout(() => {
+            let form = this.refs.chatform;
+            form.scrollTop = form.scrollHeight;
+        }, 100);
     }
     
     render () {
