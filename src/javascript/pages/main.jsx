@@ -2,7 +2,7 @@
 
 const React = require('react');
 
-import Body from '../components/Body.jsx';
+import Body from '../components/body.jsx';
 
 export default class Main extends React.Component {
     constructor (props, context) {
