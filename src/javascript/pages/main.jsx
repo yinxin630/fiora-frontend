@@ -2,11 +2,12 @@
 
 const React = require('react');
 import { Link } from 'react-router';
+import { Image } from 'amazeui-react';
 const Default = require('../default.js');
 
 import Linkman from '../components/linkman.jsx';
 import LinkmanForm from '../components/linkmanForm.jsx';
-import User from '../components/user.jsx';
+import UserForm from '../components/userForm.jsx';
 import Sidebar from '../components/sidebar.jsx';
 import CurrentLinkman from '../components/currentLinkman.jsx';
 
@@ -37,20 +38,31 @@ export default class Main extends React.Component {
                     width: '80%',
                     margin: '0px auto',
                 }}>
-                    <Sidebar>
-                        <User 
-                            nickname={ user.nickname }
-                            avatar={ user.avatar }
-                        />
-                        <nav 
-                            style={{
-                                flex: 1,
-                                marginTop: '100px',
-                            }}
-                        >
-                            <Link to="setting">用户设置</Link>
-                        </nav>
-                    </Sidebar>
+                    <div style={{
+                        width: 220,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        borderCollapse: 'collapse',
+                        borderRight: '1px solid silver',
+                        backgroundColor: 'rgba(253, 255, 255, 0.7)',
+                    }}>
+                        <UserForm user = {user}/>
+                        <LinkmanForm>
+                            {
+                                user.groups.map((group, index) => {
+                                    return <Linkman
+                                        key={ index }
+                                        avatar={ group.avatar }
+                                        nickname={ group.name }
+                                        time=""
+                                        content=""
+                                        handleClick={ () => handleLinkmanClick(group) }
+                                    />
+                                })
+                                
+                            }
+                        </LinkmanForm>
+                    </div>
                     <CurrentLinkman me={ user.id } user={ currentLinkman } handleSend={ handleSend }/>
                 </div>
             </div>

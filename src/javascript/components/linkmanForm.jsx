@@ -8,13 +8,14 @@ export default class LinkmanForm extends React.Component {
     render () {
         return (
             <div style={{
+                flex: 1,
                 width: '220px',
                 display: 'block',
                 flexDirection: 'column',
                 borderCollapse: 'collapse',
                 borderRight: '1px solid silver',
-                backgroundColor: 'rgba(253, 255, 255, 0.7)',
                 overflow: 'auto',
+                backgroundColor: 'rgba(250, 250, 250, 0.1)',
             }}>
                 { this.props.children }
             </div>
