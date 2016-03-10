@@ -2,7 +2,6 @@
 
 const React = require('react');
 
-import Linkman from '../components/linkman.jsx';
 import LinkmanForm from '../components/linkmanForm.jsx';
 import UserForm from '../components/userForm.jsx';
 
@@ -19,22 +18,8 @@ export default class ControlForm extends React.Component {
                 borderRight: '1px solid silver',
                 backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
-                <UserForm user = {user}/>
-                <LinkmanForm>
-                    {
-                        user.groups.map((group, index) => {
-                            return <Linkman
-                                key={ index }
-                                avatar={ group.avatar }
-                                nickname={ group.name }
-                                time=""
-                                content=""
-                                handleClick={ () => handleLinkmanClick(group) }
-                            />
-                        })
-                        
-                    }
-                </LinkmanForm>
+                <UserForm avatar={ user.avatar } nickname={ user.nickname }/>
+                <LinkmanForm groups={ user.groups }/>
             </div>
         );
     }

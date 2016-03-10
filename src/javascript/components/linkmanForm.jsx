@@ -1,11 +1,14 @@
 'use strict'
 
 const React = require('react');
+const Moment = require('moment');
 
-const BackgroundColor = '#FDFFFF';
+import Linkman from '../components/linkman.jsx';
 
 export default class LinkmanForm extends React.Component {
     render () {
+        let { groups } = this.props;
+        
         return (
             <div style={{
                 flex: 1,
@@ -17,7 +20,20 @@ export default class LinkmanForm extends React.Component {
                 overflow: 'auto',
                 backgroundColor: 'rgba(250, 250, 250, 0.1)',
             }}>
-                { this.props.children }
+                {
+                    groups.map((group, index) => {
+                        let lastMessage = group.messages[group.messages.length - 1] || {time: '', content: ''};
+                        
+                        return <Linkman
+                            key={ index }
+                            avatar={ group.avatar }
+                            nickname={ group.name }
+                            time={ Moment(lastMessage.time).format('HH:mm:ss') }
+                            content={ lastMessage.content.slice(0, 12) }
+                            handleClick={ () => handleLinkmanClick(group) }
+                        />
+                    })
+                }
             </div>
         );
     }

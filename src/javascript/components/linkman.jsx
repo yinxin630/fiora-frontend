@@ -13,21 +13,24 @@ export default class Linkman extends React.Component {
     };
     
     render () {
+        let { avatar, nickname, time, content } = this.props;
+        const { handleLinkmanClick } = this.props;
+        
         return (
             <div 
                 style={{
                     display: 'flex',
                     borderBottom: '1px solid silver',
                     height: 60,
-                    backgroundColor: this.props.focus ? '#D8D8EB' : '',
+                    backgroundColor: focus ? '#D8D8EB' : '',
                 }} 
                 className="linkman"
-                onClick={ this.props.handleClick }
+                onClick={ handleClick }
             >
                 <div style={{
                     padding: '10px',
                 }}>
-                    <Image src={ this.props.avatar }
+                    <Image src={ avatar }
                         width={40} height={40} circle
                     />
                 </div>
@@ -46,17 +49,17 @@ export default class Linkman extends React.Component {
                     }}>
                         <div style={{
                             fontSize: '1.2rem',
-                        }}>{ this.props.nickname }</div>
+                        }}>{ nickname }</div>
                         <div style={{
                             fontSize: '1rem',
                             color: '#687275',
-                        }}>{ this.props.time }</div>
+                        }}>{ time }</div>
                     </div>
                     <div style={{
                         color: '#687275',
                         fontSize: '1rem',
                     }}>
-                        { this.props.content }
+                        { content }
                     </div>
                 </div>
             </div>

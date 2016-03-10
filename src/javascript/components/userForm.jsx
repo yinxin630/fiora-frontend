@@ -5,7 +5,7 @@ import { Image } from 'amazeui-react';
 
 export default class UserForm extends React.Component {
     render () {
-        let { user } = this.props;
+        let { avatar, nickname } = this.props;
         
         return (
             <div style={{
@@ -24,11 +24,11 @@ export default class UserForm extends React.Component {
                 }}>
                     <Image style ={{
                         margin: 10,
-                    }} src={ user.avatar }
+                    }} src={ avatar }
                         width={60} height={60} circle
                     />
                     <span>
-                        { user.nickname }
+                        { nickname }
                     </span>
                 </div>
                 <a style={{

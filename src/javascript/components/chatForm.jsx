@@ -7,7 +7,7 @@ import InputArea from './inputArea.jsx';
 import Topbar from './topbar.jsx';
 import Message from './message.jsx';
 
-export default class CurrentLinkman extends React.Component {
+export default class ChatForm extends React.Component {
     getMessages (linkman, userId) {
         if (!linkman) {
             return;
