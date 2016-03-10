@@ -2,7 +2,6 @@
 
 const React = require('react');
 import { Link } from 'react-router';
-const Default = require('../default.js');
 
 const BackgroundColor = '#272727';
 const AppNameColor = '#FFFFFF';
@@ -16,7 +15,6 @@ const partitionStyle = {
 export default class Header extends React.Component {
     render () {
         let { handleLogout, isLogged } = this.props;
-        isLogged = isLogged || Default.isLogged;
         
         return (
             <div style={{

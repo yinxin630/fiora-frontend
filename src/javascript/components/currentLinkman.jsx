@@ -2,7 +2,7 @@
 
 const React = require('react');
 
-import ChatForm from './chatForm.jsx';
+import ChatArea from './chatArea.jsx';
 import InputArea from './inputArea.jsx';
 import Topbar from './topbar.jsx';
 import Message from './message.jsx';
@@ -39,7 +39,7 @@ export default class CurrentLinkman extends React.Component {
                     avatar={ user.avatar }
                     nickname={ user.name }
                 />
-                <ChatForm>
+                <ChatArea>
                 {
                     user.messages.map((message, index) => {
                         return <Message
@@ -52,7 +52,7 @@ export default class CurrentLinkman extends React.Component {
                         />
                     })
                 }
-                </ChatForm>
+                </ChatArea>
                 <InputArea handleSend={ message => handleSend(message, user) }/>
             </div>
             :

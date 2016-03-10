@@ -2,7 +2,7 @@
 
 const React = require('react');
 
-export default class ChatForm extends React.Component {
+export default class ChatArea extends React.Component {
     static defaultProps = {
         paddingBottom: 10,
     }

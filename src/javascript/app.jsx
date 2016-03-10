@@ -8,6 +8,7 @@ const Store = require('./store.js');
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 require('html5-desktop-notifications');
 const Config = require('../../config.js');
+const Default = require('./default.js');
 
 const socketIOClient = require('socket.io-client');
 const sailsIOClient = require('sails.io.js');
@@ -191,6 +192,10 @@ export default class App extends React.Component {
     
     render() {
         let { user, currentLinkman, isLogged, comments } = this.props.reducer;
+        user = user || Default.user;
+        currentLinkman = currentLinkman || Default.currentLinkman;
+        isLogged = isLogged || Default.isLogged;
+        comments = comments || Default.comments;
         
         const Child = this.props.children;
         const props = {

@@ -3,13 +3,11 @@
 const React = require('react');
 import { Panel, PanelGroup, Input, Button } from 'amazeui-react';
 const Moment = require('moment');
-const Default = require('../default.js');
 
 export default class Comment extends React.Component {
     render () {
         const { handleComment } = this.props;
         let { comments } = this.props;
-        comments = comments || Default.comments;
         
         return (
             <div style={{
