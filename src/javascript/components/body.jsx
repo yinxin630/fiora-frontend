@@ -19,39 +19,36 @@ export default class Body extends React.Component {
         
         return (
             <div style={{
-                flex: 1,
+                flex: 1, 
                 display: 'flex',
+                flexDirection: 'column',
+                backgroundImage: 'url("../../images/background.jpg")',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
             }}>
-                <Sidebar>
-                    <User 
-                        nickname={ user.nickname }
-                        avatar={ user.avatar }
-                    />
-                    <nav 
-                        style={{
-                            flex: 1,
-                            marginTop: '100px',
-                        }}
-                    >
-                        <Link to="setting">用户设置</Link>
-                    </nav>
-                </Sidebar>
-                <LinkmanForm>
-                    {
-                        user.groups.map((group, index) => {
-                            return <Linkman
-                                key={ index }
-                                avatar={ group.avatar }
-                                nickname={ group.name }
-                                time=""
-                                content=""
-                                handleClick={ () => handleLinkmanClick(group) }
-                            />
-                        })
-                        
-                    }
-                </LinkmanForm>
-                <CurrentLinkman me={ user.id } user={ currentLinkman } handleSend={ handleSend }/>
+                <div style={{
+                    flex: 1,
+                    display: 'flex',
+                    minWidth: 900,
+                    width: '80%',
+                    margin: '0px auto',
+                }}>
+                    <Sidebar>
+                        <User 
+                            nickname={ user.nickname }
+                            avatar={ user.avatar }
+                        />
+                        <nav 
+                            style={{
+                                flex: 1,
+                                marginTop: '100px',
+                            }}
+                        >
+                            <Link to="setting">用户设置</Link>
+                        </nav>
+                    </Sidebar>
+                    <CurrentLinkman me={ user.id } user={ currentLinkman } handleSend={ handleSend }/>
+                </div>
             </div>
         )
     }

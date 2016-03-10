@@ -33,7 +33,7 @@ export default class CurrentLinkman extends React.Component {
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: '#FDFFFF',
+                backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
                 <Topbar
                     avatar={ user.avatar }

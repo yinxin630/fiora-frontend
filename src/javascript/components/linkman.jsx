@@ -17,7 +17,7 @@ export default class Linkman extends React.Component {
             <div 
                 style={{
                     display: 'flex',
-                    borderBottom: '1px solid #e0e0e0',
+                    borderBottom: '1px solid silver',
                     height: 60,
                     backgroundColor: this.props.focus ? '#D8D8EB' : '',
                 }} 

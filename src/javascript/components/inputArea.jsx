@@ -75,6 +75,8 @@ export default class InputArea extends React.Component {
                         height: 34,
                         width: 400,
                         border: '1px solid #aaaaaa',
+                        backgroundColor: 'inherit',
+                        padding: '0px 5px',
                     }} 
                     className="input-message"
                     ref="message" 
