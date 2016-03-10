@@ -2,6 +2,7 @@
 
 const React = require('react');
 import { Image } from 'amazeui-react';
+import { Link } from 'react-router';
 
 export default class UserForm extends React.Component {
     render () {
@@ -31,12 +32,12 @@ export default class UserForm extends React.Component {
                         { nickname }
                     </span>
                 </div>
-                <a style={{
+                <Link to="setting" style={{
                     marginRight: 5,
                     color: '#333333',
                     cursor: 'pointer',
-                }}className="am-icon-gear am-icon-md">
-                </a>
+                }} className="am-icon-gear am-icon-md">
+                </Link>
             </div>
         );
     }

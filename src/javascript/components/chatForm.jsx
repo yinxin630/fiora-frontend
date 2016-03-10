@@ -7,21 +7,6 @@ import InputArea from './inputArea.jsx';
 import TopArea from './topArea.jsx';
 
 export default class ChatForm extends React.Component {
-    getMessages (linkman, userId) {
-        if (!linkman) {
-            return;
-        }
-        return linkman.messages.map(message => {
-            return <Message
-                avatar={ linkman.avatar }
-                nickname={ linkman.nickname }
-                time={ message.time }
-                content={ message.content }
-                align={ linkman.id === userId ? 'right' : 'left' }
-            />
-        });
-    }
-    
     render () {
         let { user, me } = this.props;
         const { handleSend } = this.props;

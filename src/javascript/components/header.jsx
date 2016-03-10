@@ -3,7 +3,7 @@
 const React = require('react');
 import { Link } from 'react-router';
 
-const BackgroundColor = '#272727';
+const BackgroundColor = '#111111';
 const AppNameColor = '#FFFFFF';
 const LinkStyle = {
     marginLeft: '10px',
