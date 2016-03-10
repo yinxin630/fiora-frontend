@@ -52,29 +52,29 @@ export default class InputArea extends React.Component {
         
         return (
             <div style={{
-                height: 50,
+                height: 60,
                 minHeight: 'min-content',
                 margin: 'auto',
-                padding: 10,
+                padding: '10px 0px 16px 0px',
             }}>
                 <ExpressionForm isShow={ this.state.isShow } handleClick={ this.insertAtCursor.bind(this) }/>
                 <button style={{
-                    height: 30,
+                    height: 34,
                     width: 50,
                     borderBottomLeftRadius: 15,
                     borderTopLeftRadius: 15,
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
-                    border: '1px solid #e0e0e0',
+                    border: '1px solid #aaaaaa',
                 }} className="am-icon-smile-o am-icon-md"
                     onClick={() => this.setState({isShow: !this.state.isShow})}
                 ></button>
                 <input 
                     type="text" 
                     style={{
-                        height: 30,
-                        width: 300,
-                        border: '1px solid #e0e0e0',
+                        height: 34,
+                        width: 400,
+                        border: '1px solid #aaaaaa',
                     }} 
                     className="input-message"
                     ref="message" 
@@ -88,13 +88,13 @@ export default class InputArea extends React.Component {
                     maxLength={ 512 }
                     onFocus={() => this.setState({isShow: false})}/>
                 <button style={{
-                    height: 30,
+                    height: 34,
                     width: 50,
                     borderBottomRightRadius: 15,
                     borderTopRightRadius: 15,
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
-                    border: '1px solid #e0e0e0',
+                    border: '1px solid #aaaaaa',
                 }} onClick={e => {
                     let message = this.getMessage.bind(this)();
                     handleSend(message);
