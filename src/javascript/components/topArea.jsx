@@ -3,7 +3,7 @@
 const React = require('react');
 import { Image } from 'amazeui-react';
 
-export default class Topbar extends React.Component {
+export default class TopArea extends React.Component {
     static defaultProps = {
         avatar: '',
         nickname: '',

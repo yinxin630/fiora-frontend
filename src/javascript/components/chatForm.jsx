@@ -4,8 +4,7 @@ const React = require('react');
 
 import ChatArea from './chatArea.jsx';
 import InputArea from './inputArea.jsx';
-import Topbar from './topbar.jsx';
-import Message from './message.jsx';
+import TopArea from './topArea.jsx';
 
 export default class ChatForm extends React.Component {
     getMessages (linkman, userId) {
@@ -35,24 +34,8 @@ export default class ChatForm extends React.Component {
                 flexDirection: 'column',
                 backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
-                <Topbar
-                    avatar={ user.avatar }
-                    nickname={ user.name }
-                />
-                <ChatArea>
-                {
-                    user.messages.map((message, index) => {
-                        return <Message
-                            key={ index }
-                            avatar={ message.from.avatar }
-                            nickname={ message.from.nickname }
-                            time={ message.time }
-                            content={ message.content }
-                            align={ message.from.id === me ? 'right' : 'left' }
-                        />
-                    })
-                }
-                </ChatArea>
+                <TopArea avatar={ user.avatar } nickname={ user.name }/>
+                <ChatArea messages={ user.messages } me={ user.id }/>
                 <InputArea handleSend={ message => handleSend(message, user) }/>
             </div>
             :
