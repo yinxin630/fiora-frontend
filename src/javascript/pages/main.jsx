@@ -3,7 +3,7 @@
 const React = require('react');
 
 import ControlForm from '../components/controlForm.jsx';
-import ChatForm from '../components/chatform.jsx';
+import ChatForm from '../components/chatForm.jsx';
 
 export default class Main extends React.Component {
     render () {

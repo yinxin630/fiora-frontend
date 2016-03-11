@@ -20,7 +20,7 @@ export default class ChatForm extends React.Component {
                 backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
                 <TopArea avatar={ user.avatar } nickname={ user.name }/>
-                <ChatArea messages={ user.messages } me={ user.id }/>
+                <ChatArea messages={ user.messages } me={ me }/>
                 <InputArea handleSend={ message => handleSend(message, user) }/>
             </div>
             :
