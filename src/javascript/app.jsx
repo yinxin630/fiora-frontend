@@ -101,6 +101,17 @@ export default class App extends React.Component {
         if (message === '') {
             return;
         }
+        
+        if (!this.props.reducer.isLogged) {
+            return io.socket.post('/temporary', {
+                from: this.props.reducer.user,
+                content: message,
+            }, (result, jwr) => {
+                console.log(result);
+                console.log(jwr);
+            });
+        }
+        
         io.socket.post('/message', {
                 token: io.sails.token,
                 from: this.props.reducer.user.id,
@@ -137,16 +148,28 @@ export default class App extends React.Component {
             if (jwr.statusCode === 200) {
                 io.sails.token = token;
                 
-                io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
+                return io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
                     if (jwr.statusCode === 200) {
                         this.props.dispatch(Action.setUser(result));
                         this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                        this.props.dispatch(Action.setLoginStatus(true));
                         return;
                     }
                     this.props.dispatch(Action.setUser(undefined));
+                    this.props.dispatch(Action.setLoginStatus(false));
                 })
             }
-            this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 200));
+            
+            io.socket.get('/guest', {}, (result, jwr) => {
+                if (jwr.statusCode === 200) {
+                    this.props.dispatch(Action.setUser(result));
+                    this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                    this.props.dispatch(Action.setLoginStatus(false));
+                    return;
+                }
+                this.props.dispatch(Action.setUser(undefined));
+                this.props.dispatch(Action.setLoginStatus(false));
+            })
         });
         
         io.socket.get('/comment', {}, (result, jwr) => {
