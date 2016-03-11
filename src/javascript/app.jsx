@@ -88,6 +88,19 @@ export default class App extends React.Component {
     }
     
     handleSetting (nickname, avatar) {
+        if (!this.props.reducer.isLogged) {
+            let user = this.props.reducer.user;
+            if (nickname !== '') {
+                user.nickname = nickname;
+            }
+            if (avatar !== '') {
+                user.avatar = avatar;
+            }
+            
+            this.props.history.push('/');
+            return this.props.dispatch(Action.setUser(user));
+        }
+        
         io.socket.put('/user/0', {token: io.sails.token, nickname, avatar}, (result, jwr) => {
             if (jwr.statusCode === 200) {
                 this.props.history.push('/');
