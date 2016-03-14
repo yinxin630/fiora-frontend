@@ -118,6 +118,7 @@ export default class App extends React.Component {
         if (!this.props.reducer.isLogged) {
             return io.socket.post('/temporary', {
                 from: {
+                    id: this.props.reducer.user.id,
                     nickname: this.props.reducer.user.nickname,
                     avatar: this.props.reducer.user.avatar,
                 },
