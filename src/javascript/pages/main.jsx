@@ -18,6 +18,7 @@ export default class Main extends React.Component {
                 backgroundImage: 'url("../../images/background.jpg")',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
+                minWidth: 540,
             }}>
                 <div style={{
                     flex: 1,

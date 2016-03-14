@@ -5,7 +5,7 @@ const ReactDom = require('react-dom');
 import { Provider, connect } from 'react-redux';
 const Action = require('./action.js');
 const Store = require('./store.js');
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
 require('html5-desktop-notifications');
 const Config = require('../../config.js');
 const Default = require('./default.js');
@@ -117,12 +117,12 @@ export default class App extends React.Component {
         
         if (!this.props.reducer.isLogged) {
             return io.socket.post('/temporary', {
-                from: this.props.reducer.user,
+                from: {
+                    nickname: this.props.reducer.user.nickname,
+                    avatar: this.props.reducer.user.avatar,
+                },
                 content: message,
-            }, (result, jwr) => {
-                console.log(result);
-                console.log(jwr);
-            });
+            }, (result, jwr) => { });
         }
         
         io.socket.post('/message', {
@@ -130,10 +130,7 @@ export default class App extends React.Component {
                 from: this.props.reducer.user.id,
                 to: linkman.id,
                 content: message,
-            }, (result, jwr) => {
-                // console.log(result);
-                // console.log(jwr);
-            }
+            }, (result, jwr) => { }
         );
     }
     
