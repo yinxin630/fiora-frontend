@@ -18,7 +18,7 @@ export default class Message extends React.Component {
         content = content.replace(/ /g, '&nbsp');
         content = content.replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp');
         content = content.replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, r => `<a href="${r}"" target="_blank">${r}</a>`);
-        content = content.replace(/#\([\u4e00-\u9fa5]+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
+        content = content.replace(/#\([\u4e00-\u9fa5a-z]+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
         
         return (
             <div style={{
