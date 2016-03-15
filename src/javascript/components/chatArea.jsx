@@ -41,6 +41,7 @@ export default class ChatArea extends React.Component {
                             nickname={ message.from.nickname }
                             time={ message.time }
                             content={ message.content }
+                            type={ message.type }
                             align={ message.from.id === me ? 'right' : 'left' }
                         />
                     })

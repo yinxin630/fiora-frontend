@@ -48,7 +48,7 @@ export default class InputArea extends React.Component {
     }
     
     render () {
-        const { handleSend } = this.props;
+        const { handleSend, handleImage } = this.props;
         
         return (
             <div style={{
@@ -66,8 +66,31 @@ export default class InputArea extends React.Component {
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
-                }} className="am-icon-smile-o am-icon-md"
+                }} className="am-icon-smile-o am-icon-sm"
                     onClick={() => this.setState({isShow: !this.state.isShow})}
+                ></button>
+                <input style={{ display: 'none' }} type="file" ref="image" accept="image/*"
+                    onChange={ e => {
+                        let image = this.refs.image.files[0];
+                        if (!image) {
+                            return;
+                        }
+                        
+                        let reader = new FileReader();
+                        reader.onloadend = function() {
+                            return handleImage(this.result);
+                        };
+                        reader.readAsDataURL(image);
+                    } }
+                />
+                <button style={{
+                    height: 34,
+                    width: 50,
+                    backgroundColor: 'inherit',
+                    color: '#8E8E8E',
+                    border: '1px solid #aaaaaa',
+                }} className="am-icon-image am-icon-sm"
+                    onClick={ e => this.refs.image.click() }
                 ></button>
                 <input 
                     type="text" 

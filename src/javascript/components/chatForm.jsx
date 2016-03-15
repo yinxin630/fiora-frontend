@@ -21,7 +21,7 @@ export default class ChatForm extends React.Component {
             }}>
                 <TopArea avatar={ user.avatar } nickname={ user.name }/>
                 <ChatArea messages={ user.messages } me={ me }/>
-                <InputArea handleSend={ message => handleSend(message, user) }/>
+                <InputArea handleSend={ message => handleSend(message, 'text', user) } handleImage={ image => handleSend(image, 'image', user) }/>
             </div>
             :
             <div style={{

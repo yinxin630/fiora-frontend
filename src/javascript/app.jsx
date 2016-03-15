@@ -110,8 +110,8 @@ export default class App extends React.Component {
         });
     }
     
-    handleSend (message, linkman) {
-        if (message === '') {
+    handleSend (content, type, linkman) {
+        if (!content || content === '') {
             return;
         }
         
@@ -122,7 +122,8 @@ export default class App extends React.Component {
                     nickname: this.props.reducer.user.nickname,
                     avatar: this.props.reducer.user.avatar,
                 },
-                content: message,
+                content: content,
+                type: type,
             }, (result, jwr) => { });
         }
         
@@ -130,7 +131,8 @@ export default class App extends React.Component {
                 token: io.sails.token,
                 from: this.props.reducer.user.id,
                 to: linkman.id,
-                content: message,
+                content: content,
+                type: type,
             }, (result, jwr) => { }
         );
     }
