@@ -19,7 +19,7 @@ import Main from './pages/main.jsx';
 import Register from './pages/register.jsx';
 import Login from './pages/login.jsx';
 import Setting from './pages/setting.jsx';
-import Source from './pages/source.jsx';
+import About from './pages/about.jsx';
 import Comment from './pages/comment.jsx';
 
 io.sails.url = Config.server;
@@ -279,7 +279,7 @@ ReactDom.render(
                 <Route path="register" component={ Register }/>
                 <Route path="login" component={ Login }/>
                 <Route path="setting" component={ Setting }/>
-                <Route path="source" component={ Source }/>
+                <Route path="about" component={ About }/>
                 <Route path="comment" component={ Comment }/>
             </Route>
         </Router>

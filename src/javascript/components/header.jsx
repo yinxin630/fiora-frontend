@@ -38,8 +38,9 @@ export default class Header extends React.Component {
                         alignItems: 'center',
                     }}>
                         <Link style={LinkStyle} to="/">首页</Link>
-                        <Link style={LinkStyle} to="/source">源码</Link>
+                        <Link style={LinkStyle} to="/about">关于</Link>
                         <Link style={LinkStyle} to="/comment">评论</Link>
+                        <a style={LinkStyle} href="http://pan.baidu.com/s/1o70hVjs" target="_blank">客户端</a>
                         <a style={LinkStyle} href="http://www.suisuijiang.com" target="_blank">作者</a>
                         <div style={ partitionStyle }/>
                         <Link style={LinkStyle} to="/register">注册</Link>
