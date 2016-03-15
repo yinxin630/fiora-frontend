@@ -23,9 +23,14 @@ export default class Setting extends React.Component {
                         </span>
                         <fieldset className="am-form-set">
                             <Input type="text" placeholder="昵称" icon="user" ref="nickname" maxLength={8}/>
-                            <Input type="file" label="头像" id="avatar"/>
+                            <Input type="file" label="头像" id="avatar" accept="image/*"/>
                             <Button amStyle="primary" block onClick={ e => {
                                 let avatar = document.querySelector('#avatar').files[0];
+                                if (avatar.size > 2048000) {
+                                    this.refs.info.innerText = '文件过大, 请选择小于2MB的文件';
+                                    return;
+                                }
+                                
                                 let nickname = this.refs.nickname.getValue();
                                 if (!avatar) {
                                     return handleSetting(nickname, '');
