@@ -26,7 +26,7 @@ export default class Setting extends React.Component {
                             <Input type="file" label="头像" id="avatar" accept="image/*"/>
                             <Button amStyle="primary" block onClick={ e => {
                                 let avatar = document.querySelector('#avatar').files[0];
-                                if (avatar || avatar.size > 2048000) {
+                                if (avatar && avatar.size > 2048000) {
                                     this.refs.info.innerText = '文件过大, 请选择小于2MB的文件';
                                     return;
                                 }
