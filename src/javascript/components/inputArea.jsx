@@ -78,7 +78,14 @@ export default class InputArea extends React.Component {
                         
                         let reader = new FileReader();
                         reader.onloadend = function() {
-                            return handleImage(this.result);
+                            let img = new Image();
+                            img.src = this.result;
+                            
+                            return handleImage({
+                                image: this.result,
+                                width: img.width,
+                                height: img.height,
+                            });
                         };
                         reader.readAsDataURL(image);
                     } }

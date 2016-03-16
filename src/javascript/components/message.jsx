@@ -5,7 +5,7 @@ import { Image } from 'amazeui-react';
 const Moment = require('moment');
 
 export default class Message extends React.Component {
-    showMessage (content, type) {
+    showMessage (content, type, width, height) {
         if (!type || type === 'text') {
             return (
                 <div
@@ -21,6 +21,8 @@ export default class Message extends React.Component {
             );
         }
         else if (type === 'image') {
+            const MessageContentMaxWidth = 458;
+            
             return (
                 <div
                     style={{
@@ -31,7 +33,7 @@ export default class Message extends React.Component {
                         borderRadius: 10,
                         display: 'inline-block',
                     }}>
-                    <img width="100%" src={ content }/>
+                    <img width="100%" height={ width > MessageContentMaxWidth ? MessageContentMaxWidth / width * height : height } src={ content }/>
                 </div>
             );
         }
@@ -46,7 +48,7 @@ export default class Message extends React.Component {
     }
     
     render () {
-        let { align, avatar, nickname, time, content, type } = this.props;
+        let { align, avatar, nickname, time, content, type, width, height } = this.props;
         if (type === 'text') {
             content = content.replace(/ /g, '&nbsp');
             content = content.replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp');
@@ -61,7 +63,7 @@ export default class Message extends React.Component {
                 marginTop: 10,
                 flexDirection: align !== 'right' || 'row-reverse', 
             }}>
-                    <Image src={ this.props.avatar }
+                    <AMImage src={ this.props.avatar }
                     width={40} height={40} circle
                 />
                 <div style={{
@@ -87,7 +89,7 @@ export default class Message extends React.Component {
                         </span>
                     </div>
                     {
-                        this.showMessage(content, type)
+                        this.showMessage(content, type, width, height)
                     }
                 </div>
             </div>
