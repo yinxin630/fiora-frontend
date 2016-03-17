@@ -63,7 +63,7 @@ export default class Message extends React.Component {
                 marginTop: 10,
                 flexDirection: align !== 'right' || 'row-reverse', 
             }}>
-                    <Image src={ this.props.avatar }
+                    <Image src={ avatar }
                     width={40} height={40} circle
                 />
                 <div style={{
