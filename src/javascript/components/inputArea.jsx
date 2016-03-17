@@ -81,11 +81,13 @@ export default class InputArea extends React.Component {
                             let img = new Image();
                             img.src = this.result;
                             
-                            return handleImage({
-                                image: this.result,
-                                width: img.width,
-                                height: img.height,
-                            });
+                            return img.onload = () => {
+                                return handleImage({
+                                    image: this.result,
+                                    width: img.width,
+                                    height: img.height,
+                                });
+                            }
                         };
                         reader.readAsDataURL(image);
                     } }
