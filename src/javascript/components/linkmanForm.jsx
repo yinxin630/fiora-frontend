@@ -22,14 +22,14 @@ export default class LinkmanForm extends React.Component {
             }}>
                 {
                     groups.map((group, index) => {
-                        let lastMessage = group.messages[group.messages.length - 1] || {time: '', content: ''};
+                        let lastMessage = group.messages[group.messages.length - 1] || {time: '', content: {text: ''}, type: 'text'};
                         
                         return <Linkman
                             key={ index }
                             avatar={ group.avatar }
                             nickname={ group.name }
                             time={ Moment(lastMessage.time).format('HH:mm:ss') }
-                            content={ lastMessage.type === 'image' ? '<image>' : lastMessage.content.slice(0, 12) }
+                            content={ lastMessage.type === 'image' ? '<image>' : lastMessage.content.text.slice(0, 12) }
                             handleClick={ () => handleLinkmanClick(group) }
                         />
                     })

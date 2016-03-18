@@ -5,7 +5,7 @@ import { Image } from 'amazeui-react';
 const Moment = require('moment');
 
 export default class Message extends React.Component {
-    showMessage (content, type, width, height) {
+    showMessage (content, type) {
         if (!type || type === 'text') {
             return (
                 <div
@@ -16,7 +16,7 @@ export default class Message extends React.Component {
                         boxShadow: '0px 0px 3px',
                         borderRadius: 10,
                         display: 'inline-block',
-                    }} dangerouslySetInnerHTML={ {__html: content} }>
+                    }} dangerouslySetInnerHTML={ {__html: content.text} }>
                 </div>
             );
         }
@@ -33,7 +33,7 @@ export default class Message extends React.Component {
                         borderRadius: 10,
                         display: 'inline-block',
                     }}>
-                    <img width="100%" height={ width > MessageContentMaxWidth ? MessageContentMaxWidth / width * height : height } src={ content }/>
+                    <img width="100%" height={ content.width > MessageContentMaxWidth ? MessageContentMaxWidth / content.width * content.height : content.height } src={ content.image }/>
                 </div>
             );
         }
@@ -48,12 +48,14 @@ export default class Message extends React.Component {
     }
     
     render () {
-        let { align, avatar, nickname, time, content, type, width, height } = this.props;
+        let { align, avatar, nickname, time, content, type} = this.props;
         if (type === 'text') {
-            content = content.replace(/ /g, '&nbsp');
-            content = content.replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp');
-            content = content.replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, r => `<a href="${r}"" target="_blank">${r}</a>`);
-            content = content.replace(/#\([\u4e00-\u9fa5a-z]+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
+            let text = content.text;
+            text = text.replace(/ /g, '&nbsp');
+            text = text.replace(/\t/g, '&nbsp&nbsp&nbsp&nbsp');
+            text = text.replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, r => `<a href="${r}"" target="_blank">${r}</a>`);
+            text = text.replace(/#\([\u4e00-\u9fa5a-z]+\)/g, r => `<img src="../images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
+            content.text = text;
         }
         
         return (
@@ -89,7 +91,7 @@ export default class Message extends React.Component {
                         </span>
                     </div>
                     {
-                        this.showMessage(content, type, width, height)
+                        this.showMessage(content, type)
                     }
                 </div>
             </div>

@@ -116,7 +116,7 @@ export default class InputArea extends React.Component {
                         if (e.keyCode === 13 && !e.shiftKey) {
                             let message = this.getMessage.bind(this)();
                             e.preventDefault();
-                            handleSend(message);
+                            handleSend({text: message});
                         }
                     } } 
                     maxLength={ 512 }
@@ -131,7 +131,7 @@ export default class InputArea extends React.Component {
                     border: '1px solid #aaaaaa',
                 }} onClick={e => {
                     let message = this.getMessage.bind(this)();
-                    handleSend(message);
+                    handleSend({text: message});
                 }}>发送</button>
             </div>
         );

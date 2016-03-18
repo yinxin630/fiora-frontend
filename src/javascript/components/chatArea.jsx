@@ -11,12 +11,14 @@ export default class ChatArea extends React.Component {
     
     componentDidUpdate () {
         let form = this.refs.chatform;
-        if (this.props.messages[this.props.messages.length - 1].from.id === this.props.me) {
+        let lastMessage = this.props.messages[this.props.messages.length - 1];
+        if (lastMessage && lastMessage.from.id === this.props.me) {
             return form.scrollTop = form.scrollHeight;
         }
         
         let maxHeight = form.scrollHeight - form.clientHeight;
-        if (form.scrollTop >= maxHeight - this.props.paddingBottom - ((form.lastElementChild.offsetHeight) || 0) - 5) {
+        let lastElement = form.lastElementChild;
+        if (lastElement && form.scrollTop >= maxHeight - this.props.paddingBottom - lastElement.offsetHeight - 10) {
             form.scrollTop = form.scrollHeight;
         }
     }
@@ -46,8 +48,6 @@ export default class ChatArea extends React.Component {
                             time={ message.time }
                             content={ message.content }
                             type={ message.type }
-                            width={ message.width }
-                            height={ message.height }
                             align={ message.from.id === me ? 'right' : 'left' }
                         />
                     })
