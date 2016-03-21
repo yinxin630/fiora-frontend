@@ -1,10 +1,16 @@
 'use strict'
 
 const React = require('react');
-import { Panel, PanelGroup, Input, Button } from 'amazeui-react';
+import { Input, Button } from 'amazeui-react';
+import { Collapse } from 'antd';
+const Panel = Collapse.Panel;
 const Moment = require('moment');
 
 export default class Comment extends React.Component {
+    componentDidMount () {
+        this.props.getComment();
+    }
+    
     render () {
         const { handleComment } = this.props;
         let { comments } = this.props;
@@ -22,7 +28,6 @@ export default class Comment extends React.Component {
                     <Input type="textarea" placeholder="添加评论" ref="comment"/>
                     <Button certen amStyle="primary" onClick={ e => {
                         handleComment(this.refs.comment.getValue());
-                        console.log(this.refs.comment.getFieldDOMNode());
                         this.refs.comment.getFieldDOMNode().value = '';
                      }}>提交评论</Button>
                 </div>
@@ -30,13 +35,17 @@ export default class Comment extends React.Component {
                     flex: 1,
                     overflow: 'auto',
                 }}>
-                    <PanelGroup accordion>
+                    <Collapse accordion>
                         {
                             comments.map((comment, index, comments) => {
-                                return <Panel key={ index } header={ `${comment.from.nickname || '游客'} ${Moment(comment.time).format('GGGG-MM-DD HH:mm:ss')}` } eventKey={ index }>{ comment.content }</Panel>
+                                return (
+                                    <Panel header={ `${comment.from.nickname || '游客'} ${Moment(comment.time).format('GGGG-MM-DD HH:mm:ss')}` } key={ index }>
+                                        <p>{ comment.content }</p>
+                                    </Panel>
+                                );
                             })
                         }
-                    </PanelGroup>
+                    </Collapse>
                 </div>
             </div>
         );
