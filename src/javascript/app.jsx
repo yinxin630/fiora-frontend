@@ -23,6 +23,8 @@ import Setting from './pages/setting.jsx';
 import About from './pages/about.jsx';
 import Comment from './pages/comment.jsx';
 
+message.config({top: 80});
+
 io.sails.url = Config.server;
 
 export default class App extends React.Component {
@@ -77,12 +79,15 @@ export default class App extends React.Component {
             }
             else {
                 if (result.msg === 'invalid username') {
-                    return component.refs.innerText = '用户名包含非法字符或者长度不合格';
+                    return message.warn('用户名包含非法字符或者长度不合格');
                 }
                 else if (result.msg === 'invalid password') {
-                    return component.refs.innerText = '密码包含非法字符或者长度不合格';
+                    return message.warn('密码包含非法字符或者长度不合格');
                 }
-                component.refs.info.innerText = '注册失败，请重试';
+                else if (result.msg.match(/A record with that `username` already exists/)) {
+                    return message.warn('该用户名已存在');
+                }
+                message.warn('注册失败, 请重试');
             }
         });
     }

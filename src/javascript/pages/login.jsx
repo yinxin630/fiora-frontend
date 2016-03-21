@@ -5,8 +5,6 @@ import Header from '../components/header.jsx';
 import { Form, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
 
-message.config({top: 80});
-
 export default class Login extends React.Component {
     checkValue (username, password) {
         this.setState({
