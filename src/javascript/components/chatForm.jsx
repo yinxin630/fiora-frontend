@@ -9,7 +9,7 @@ import TopArea from './topArea.jsx';
 export default class ChatForm extends React.Component {
     render () {
         let { user, me } = this.props;
-        const { handleSend } = this.props;
+        const { handleSend, handleImageMessageViewer } = this.props;
         
         return (
             user ? 
@@ -20,7 +20,7 @@ export default class ChatForm extends React.Component {
                 backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
                 <TopArea avatar={ user.avatar } nickname={ user.name }/>
-                <ChatArea messages={ user.messages } me={ me }/>
+                <ChatArea messages={ user.messages } me={ me } handleImageMessageViewer={ handleImageMessageViewer }/>
                 <InputArea handleSend={ message => handleSend(message, 'text', user) } handleImage={ image => handleSend(image, 'image', user) }/>
             </div>
             :

@@ -35,7 +35,14 @@ export default class Message extends React.Component {
                         borderRadius: 10,
                         display: 'inline-block',
                     }}>
-                    <img width="100%" height={ content.width > MessageContentMaxWidth ? MessageContentMaxWidth / content.width * content.height : content.height } src={ content.image }/>
+                    <img 
+                        width="100%" 
+                        height={ content.width > MessageContentMaxWidth ? MessageContentMaxWidth / content.width * content.height : content.height } 
+                        src={ content.image }
+                        onDoubleClick={e => {
+                            this.props.handleDoubleClick(content.image);
+                        }}
+                    />
                 </div>
             );
         }

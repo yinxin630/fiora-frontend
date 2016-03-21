@@ -32,6 +32,7 @@ export default class ChatArea extends React.Component {
     
     render () {
         let { messages, me } = this.props;
+        const { handleImageMessageViewer } = this.props;
         
         return (
             <div style={{
@@ -49,6 +50,7 @@ export default class ChatArea extends React.Component {
                             content={ message.content }
                             type={ message.type }
                             align={ message.from.id === me ? 'right' : 'left' }
+                            handleDoubleClick={ handleImageMessageViewer }
                         />
                     })
                 }

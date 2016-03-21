@@ -70,7 +70,7 @@ export default class InputArea extends React.Component {
                     fontSize: 22,
                 }} className="icon"
                     onClick={() => this.setState({isShow: !this.state.isShow})}
-                >&#xe6f2;</button>
+                >&#xe603;</button>
                 <input style={{ display: 'none' }} type="file" ref="image" accept="image/*"
                     onChange={ e => {
                         let image = this.refs.image.files[0];
@@ -103,7 +103,7 @@ export default class InputArea extends React.Component {
                     fontSize: 22,
                 }} onClick={ e => this.refs.image.click() }
                 className="icon"
-                >&#xe705;</button>
+                >&#xe600;</button>
                 <input 
                     type="text" 
                     style={{
@@ -136,7 +136,7 @@ export default class InputArea extends React.Component {
                 }} className="icon" onClick={e => {
                     let message = this.getMessage.bind(this)();
                     handleSend({text: message});
-                }}>&#xe614;</button>
+                }}>&#xe602;</button>
             </div>
         );
     }

@@ -39,7 +39,7 @@ export default class UserForm extends React.Component {
                     cursor: 'pointer',
                     fontSize: 34,
                 }} className="icon">
-                    &#xe658;
+                    &#xe601;
                 </Link>
             </div>
         );

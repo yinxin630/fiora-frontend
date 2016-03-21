@@ -15,9 +15,11 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-smile:before { content: "\e6f2"; }
-.icon-picture:before { content: "\e705"; }
-.icon-send:before { content: "\e614"; }
-.icon-setting:before { content: "\e606"; }
-.icon-setting1:before { content: "\e658"; }
-.icon-setting2:before { content: "\e694"; }
+.icon-picture:before { content: "\e600"; }
+.icon-setting:before { content: "\e601"; }
+.icon-send:before { content: "\e602"; }
+.icon-smile:before { content: "\e603"; }
+.icon-setting1:before { content: "\e604"; }
+.icon-setting2:before { content: "\e605"; }
+.icon-cancel:before { content: "\e606"; }
+.icon-cancel1:before { content: "\e607"; }

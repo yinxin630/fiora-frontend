@@ -22,6 +22,7 @@ import Login from './pages/login.jsx';
 import Setting from './pages/setting.jsx';
 import About from './pages/about.jsx';
 import Comment from './pages/comment.jsx';
+import ImageViewer from './components/imageViewer.jsx';
 
 message.config({top: 80});
 
@@ -165,10 +166,22 @@ export default class App extends React.Component {
         });
     }
     
+    handleImageViewerClose () {
+        this.setState({imageViewer: false});
+    }
+    
+    handleImageMessageViewer (src) {
+        this.setState({
+            src,
+            imageViewer: true,
+        });
+    }
+    
     constructor (props, context) {
         super(props, context);
         this.state = {
-            height: window.innerHeight,
+            src: '',
+            imageViewer: false,
         }
     }
  
@@ -252,6 +265,7 @@ export default class App extends React.Component {
                 currentLinkman: currentLinkman,
                 handleLinkmanClick: this.handleLinkmanClick.bind(this),
                 handleSend: this.handleSend.bind(this),
+                handleImageMessageViewer: this.handleImageMessageViewer.bind(this),
             },
             register: {
                 handleRegister: this.handleRegister.bind(this),
@@ -270,16 +284,22 @@ export default class App extends React.Component {
         }
         
         return (
-            <div style={{
-                width: '100vw',
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-            }}>
-                <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ isLogged }/>
-                {
-                    Child && React.cloneElement(Child, props[Child.props.route.page || Child.props.route.path])
-                }
+            <div>
+                <ImageViewer display={ this.state.imageViewer }
+                    handleClose={ this.handleImageViewerClose.bind(this) }
+                    src={ this.state.src }
+                />
+                <div style={{
+                    width: '100vw',
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}>
+                    <Header handleLogout={ this.handleLogout.bind(this) } isLogged={ isLogged }/>
+                    {
+                        Child && React.cloneElement(Child, props[Child.props.route.page || Child.props.route.path])
+                    }
+                </div>
             </div>
         );
     }

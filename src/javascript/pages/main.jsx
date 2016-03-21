@@ -8,7 +8,7 @@ import ChatForm from '../components/chatForm.jsx';
 export default class Main extends React.Component {
     render () {
         let { user, currentLinkman } = this.props;
-        const { handleLinkmanClick, handleSend } = this.props;
+        const { handleLinkmanClick, handleSend, handleImageMessageViewer } = this.props;
         
         return (
             <div style={{
@@ -28,7 +28,7 @@ export default class Main extends React.Component {
                     margin: '0px auto',
                 }}>
                     <ControlForm user={ user }/>
-                    <ChatForm me={ user.id } user={ currentLinkman } handleSend={ handleSend }/>
+                    <ChatForm me={ user.id } user={ currentLinkman } handleSend={ handleSend } handleImageMessageViewer={ handleImageMessageViewer }/>
                 </div>
             </div>
         );
