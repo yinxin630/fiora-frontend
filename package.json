@@ -25,7 +25,6 @@
     }
   },
   "dependencies": {
-    "amazeui-react": "^1.0.1",
     "antd": "^0.12.8",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",

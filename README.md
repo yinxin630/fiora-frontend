@@ -9,13 +9,12 @@ Fiora聊天室前端
 * 工具:   
     1. webpack
     2. babel
-    3. amazeui-react
-    4. antd
-    5. html5-desktop-notifications
-    6. koa-send
-    7. koa-static
-    8. moment
-    9. sails.io.js
+    3. antd
+    4. html5-desktop-notifications
+    5. koa-send
+    6. koa-static
+    7. moment
+    8. sails.io.js
     
 ## 安装
 

@@ -37,7 +37,9 @@ export default class UserForm extends React.Component {
                     marginRight: 5,
                     color: '#333333',
                     cursor: 'pointer',
-                }} className="am-icon-gear am-icon-md">
+                    fontSize: 34,
+                }} className="icon">
+                    &#xe658;
                 </Link>
             </div>
         );

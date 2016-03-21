@@ -56,6 +56,7 @@ export default class InputArea extends React.Component {
                 minHeight: 'min-content',
                 margin: 'auto',
                 padding: '10px 0px 16px 0px',
+                display: 'flex',
             }}>
                 <ExpressionForm isShow={ this.state.isShow } handleClick={ this.insertAtCursor.bind(this) }/>
                 <button style={{
@@ -66,9 +67,10 @@ export default class InputArea extends React.Component {
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
-                }} className="am-icon-smile-o am-icon-sm"
+                    fontSize: 22,
+                }} className="icon"
                     onClick={() => this.setState({isShow: !this.state.isShow})}
-                ></button>
+                >&#xe6f2;</button>
                 <input style={{ display: 'none' }} type="file" ref="image" accept="image/*"
                     onChange={ e => {
                         let image = this.refs.image.files[0];
@@ -98,9 +100,10 @@ export default class InputArea extends React.Component {
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
-                }} className="am-icon-image am-icon-sm"
-                    onClick={ e => this.refs.image.click() }
-                ></button>
+                    fontSize: 22,
+                }} onClick={ e => this.refs.image.click() }
+                className="icon"
+                >&#xe705;</button>
                 <input 
                     type="text" 
                     style={{
@@ -110,7 +113,7 @@ export default class InputArea extends React.Component {
                         backgroundColor: 'inherit',
                         padding: '0px 5px',
                     }} 
-                    className="input-message"
+                    className="input-message icon"
                     ref="message" 
                     onKeyDown={ e => {
                         if (e.keyCode === 13 && !e.shiftKey) {
@@ -129,10 +132,11 @@ export default class InputArea extends React.Component {
                     backgroundColor: 'inherit',
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
-                }} onClick={e => {
+                    fontSize: 22,
+                }} className="icon" onClick={e => {
                     let message = this.getMessage.bind(this)();
                     handleSend({text: message});
-                }}>发送</button>
+                }}>&#xe614;</button>
             </div>
         );
     }
