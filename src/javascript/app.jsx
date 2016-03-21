@@ -6,6 +6,7 @@ import { Provider, connect } from 'react-redux';
 const Action = require('./action.js');
 const Store = require('./store.js');
 import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
+import { message } from 'antd';
 require('html5-desktop-notifications');
 const Config = require('../../config.js');
 const Default = require('./default.js');
@@ -47,14 +48,13 @@ export default class App extends React.Component {
                 }
                 else {
                     if (result.msg.match(/user.*not exists/)) {
-                        component.refs.info.innerText = '用户不存在';
+                        message.warn('该用户不存在');
                         return;
                     }
                     else if (result.msg.match(/password not correct/)) {
-                        component.refs.info.innerText = '密码错误';
+                        message.warn('密码错误');
                         return;
                     }
-                    component.refs.info.innerText = msg;
                 }
                 this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 201));
             }
