@@ -1,7 +1,8 @@
 'use strict'
 
 const React = require('react');
-import { Image } from 'amazeui-react';
+
+import Avatar from './avatar.jsx';
 
 export default class TopArea extends React.Component {
     static defaultProps = {
@@ -28,8 +29,8 @@ export default class TopArea extends React.Component {
                         padding: 10,
                         display: this.props.noNickname ? 'none' : 'block'
                     }}>
-                        <Image src={ this.props.avatar }
-                            width={40} height={40} circle
+                        <Avatar src={ this.props.avatar }
+                            width={40} height={40}
                         />
                     </div>
                     <span>{ this.props.nickname }</span>

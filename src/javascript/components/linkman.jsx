@@ -1,7 +1,7 @@
 'use strict'
 
 const React = require('react');
-import { Image } from 'amazeui-react';
+import Avatar from './avatar.jsx';
 
 export default class Linkman extends React.Component {
     static defaultProps = {
@@ -30,8 +30,8 @@ export default class Linkman extends React.Component {
                 <div style={{
                     padding: '10px',
                 }}>
-                    <Image src={ avatar }
-                        width={40} height={40} circle
+                    <Avatar src={ avatar }
+                        width={40} height={40}
                     />
                 </div>
                 <div style={{

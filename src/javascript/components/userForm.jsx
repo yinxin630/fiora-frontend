@@ -1,8 +1,9 @@
 'use strict'
 
 const React = require('react');
-import { Image } from 'amazeui-react';
 import { Link } from 'react-router';
+
+import Avatar from './avatar.jsx';
 
 export default class UserForm extends React.Component {
     render () {
@@ -23,10 +24,10 @@ export default class UserForm extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'center',
                 }}>
-                    <Image style ={{
+                    <Avatar style ={{
                         margin: 10,
                     }} src={ avatar }
-                        width={60} height={60} circle
+                        width={60} height={60}
                     />
                     <span>
                         { nickname }

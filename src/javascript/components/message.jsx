@@ -1,8 +1,9 @@
 'use strict'
 
 const React = require('react');
-import { Image } from 'amazeui-react';
 const Moment = require('moment');
+
+import Avatar from './avatar.jsx';
 
 export default class Message extends React.Component {
     showMessage (content, type) {
@@ -65,8 +66,8 @@ export default class Message extends React.Component {
                 marginTop: 10,
                 flexDirection: align !== 'right' || 'row-reverse', 
             }}>
-                    <Image src={ avatar }
-                    width={40} height={40} circle
+                <Avatar src={ avatar }
+                    width={40} height={40}
                 />
                 <div style={{
                     width: 'calc(100% - 40px * 2)',
