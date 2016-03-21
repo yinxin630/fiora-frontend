@@ -7,6 +7,7 @@ const BackgroundColor = '#111111';
 const AppNameColor = '#FFFFFF';
 const LinkStyle = {
     marginLeft: '10px',
+    fontSize: '1.5rem',
 };
 const partitionStyle = {
     marginLeft: 30,
@@ -20,6 +21,7 @@ export default class Header extends React.Component {
             <div style={{
                 backgroundColor: BackgroundColor,
                 boxShadow: `0px 0px 10px ${BackgroundColor}`,
+                height: 60,
             }}>
                 <div style={{
                     width: '70%',
@@ -29,7 +31,7 @@ export default class Header extends React.Component {
                     justifyContent: 'space-between',
                 }}>
                     <h1 style={{
-                        fontSize: '3rem',
+                        fontSize: '3.5rem',
                         padding: '6px 0px',
                         color: AppNameColor,
                     }}>FIORA</h1>

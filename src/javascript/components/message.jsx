@@ -17,6 +17,7 @@ export default class Message extends React.Component {
                         boxShadow: '0px 0px 3px',
                         borderRadius: 10,
                         display: 'inline-block',
+                        fontSize: '1.5rem',
                     }} dangerouslySetInnerHTML={ {__html: content.text} }>
                 </div>
             );
@@ -80,13 +81,13 @@ export default class Message extends React.Component {
                     <div style={{
                     }}>
                         <span style={{
-                            fontSize: '1.4rem',
+                            fontSize: '1.5rem',
                         }}>
                             { nickname }
                         </span>
                         <span style={{
                             marginLeft: 5,
-                            fontSize: '1rem',
+                            fontSize: '1.2rem',
                         }}>
                             { Moment(time).format('MM/DD hh:mm:ss A') }
                         </span>

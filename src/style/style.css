@@ -3,10 +3,11 @@
     margin: 0;
     border: none;
     box-sizing: border-box;
+    color: #333;
 }
 
-h1 {
-    margin: 0;
+html {
+    font-size: 10px;
 }
 
 body {

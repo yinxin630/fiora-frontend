@@ -33,7 +33,7 @@ export default class TopArea extends React.Component {
                             width={40} height={40}
                         />
                     </div>
-                    <span>{ this.props.nickname }</span>
+                    <span style={{fontSize: '2rem'}}>{ this.props.nickname }</span>
                 </div>
                 <div>
                 </div>

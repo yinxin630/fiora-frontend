@@ -48,16 +48,16 @@ export default class Linkman extends React.Component {
                         alignItems: 'center',
                     }}>
                         <div style={{
-                            fontSize: '1.2rem',
+                            fontSize: '1.3rem',
+                            color: '#687275',
                         }}>{ nickname }</div>
                         <div style={{
-                            fontSize: '1rem',
                             color: '#687275',
                         }}>{ time }</div>
                     </div>
                     <div style={{
                         color: '#687275',
-                        fontSize: '1rem',
+                        fontSize: '1.1rem',
                     }}>
                         { content }
                     </div>

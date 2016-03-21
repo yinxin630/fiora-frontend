@@ -29,7 +29,7 @@ export default class UserForm extends React.Component {
                     }} src={ avatar }
                         width={60} height={60}
                     />
-                    <span>
+                    <span style={{fontSize: '1.5rem'}}>
                         { nickname }
                     </span>
                 </div>

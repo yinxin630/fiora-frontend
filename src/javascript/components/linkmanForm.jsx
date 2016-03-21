@@ -28,7 +28,7 @@ export default class LinkmanForm extends React.Component {
                             key={ index }
                             avatar={ group.avatar }
                             nickname={ group.name }
-                            time={ Moment(lastMessage.time).format('HH:mm:ss') }
+                            time={ Moment(lastMessage.time).format('HH:mm') }
                             content={ lastMessage.type === 'image' ? '<image>' : lastMessage.content.text.slice(0, 12) }
                             handleClick={ () => handleLinkmanClick(group) }
                         />
