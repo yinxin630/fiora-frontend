@@ -1,9 +1,9 @@
 'use strict'
 
 const React = require('react');
-import { Input, Button } from 'amazeui-react';
-import { Collapse } from 'antd';
+import { Collapse, Form, Input, Button, message } from 'antd';
 const Panel = Collapse.Panel;
+const FormItem = Form.Item;
 const Moment = require('moment');
 
 export default class Comment extends React.Component {
@@ -25,17 +25,21 @@ export default class Comment extends React.Component {
                     textAlign: 'center',
                     marginBottom: 30,
                 }}>
-                    <Input type="textarea" placeholder="添加评论" ref="comment"/>
-                    <Button certen amStyle="primary" onClick={ e => {
-                        handleComment(this.refs.comment.getValue());
-                        this.refs.comment.getFieldDOMNode().value = '';
-                     }}>提交评论</Button>
+                    <Form horizontal>
+                        <FormItem>
+                            <Input type="textarea" placeholder="请输入评论" ref="comment"/>
+                        </FormItem>
+                        <Button certen amStyle="primary" onClick={ e => {
+                            handleComment(this.refs.comment.refs.input.value);
+                            this.refs.comment.refs.input.value = '';
+                        }}>提交评论</Button>
+                     </Form>
                 </div>
                 <div style={{
                     flex: 1,
                     overflow: 'auto',
                 }}>
-                    <Collapse accordion>
+                    <Collapse accordion defaultActiveKey={['0']}>
                         {
                             comments.map((comment, index, comments) => {
                                 return (
