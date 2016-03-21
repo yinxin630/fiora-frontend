@@ -206,10 +206,6 @@ export default class App extends React.Component {
     }
     
     componentDidMount () {
-        window.addEventListener('resize', () => {
-            this.setState({height: window.innerHeight});
-        });
-        
         window.onfocus = () => this.props.dispatch(Action.setWindowVisible(true));
         window.onblur = () => this.props.dispatch(Action.setWindowVisible(false));
         this.props.dispatch(Action.setWindowVisible(true));
@@ -258,7 +254,8 @@ export default class App extends React.Component {
         
         return (
             <div style={{
-                height: this.state.height,
+                width: '100vw',
+                height: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
             }}>
