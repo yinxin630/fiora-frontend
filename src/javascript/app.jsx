@@ -6,7 +6,7 @@ import { Provider, connect } from 'react-redux';
 const Action = require('./action.js');
 const Store = require('./store.js');
 import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
-import { message } from 'antd';
+import { message, notification } from 'antd';
 require('html5-desktop-notifications');
 const Config = require('../../config.js');
 const Default = require('./default.js');
@@ -195,6 +195,11 @@ export default class App extends React.Component {
                     this.props.dispatch(Action.setUser(result));
                     this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
                     this.props.dispatch(Action.setLoginStatus(false));
+                    notification['info']({
+                        message: '提示',
+                        description: '您正在以游客的身份登录聊天室, 游客的消息记录/昵称/头像不会被保存, 欢迎注册帐号使用',
+                        duration: 8,
+                    });
                     return;
                 }
                 this.props.dispatch(Action.setUser(undefined));
