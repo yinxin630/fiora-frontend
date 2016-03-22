@@ -117,7 +117,7 @@ export default class App extends React.Component {
     }
     
     handleSend (content, type, linkman) {
-        if (!content || content === '') {
+        if (!content || content.text === '') {
             return;
         }
         
