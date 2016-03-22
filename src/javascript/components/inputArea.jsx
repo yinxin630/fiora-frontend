@@ -113,7 +113,7 @@ export default class InputArea extends React.Component {
                         backgroundColor: 'inherit',
                         padding: '0px 5px',
                     }} 
-                    className="input-message icon"
+                    className="input-message"
                     ref="message" 
                     onKeyDown={ e => {
                         if (e.keyCode === 13 && !e.shiftKey) {
