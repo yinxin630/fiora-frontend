@@ -7,7 +7,7 @@ import Avatar from './avatar.jsx';
 
 export default class Message extends React.Component {
     showMessage (content, type) {
-        if (!type || type === 'text') {
+        if (type === 'text') {
             return (
                 <div
                     style={{

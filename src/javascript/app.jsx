@@ -224,7 +224,7 @@ export default class App extends React.Component {
             if (!this.props.reducer.windowVisible) {
                 let notification = notify.createNotification(result.from.nickname, {
                     icon: result.from.avatar,
-                    body: result.content.slice(0, 60),
+                    body: result.content.text.slice(0, 60),
                     tag: result.from.id,
                 });
             }
