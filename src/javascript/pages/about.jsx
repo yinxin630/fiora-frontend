@@ -10,9 +10,9 @@ export default class Source extends React.Component {
                 textAlign: 'center',
                 paddingTop: 100,
             }}>
-                <label>版本：v1.3.0</label> <br/>
-                <label>新增功能: 发图片, 发URL</label> <br/>
-                <label>BUG修复: 头像类型,大小限制, 消息长度限制, 头像放到七牛存储, 几个表情错误</label> <br/>
+                <label>版本：v1.4.1</label> <br/>
+                <label>新增功能: 查看图片原图, 游客提示, 游客消息标注, 注册登录等功能的错误提示优化</label> <br/>
+                <label>BUG修复: firefox,safari发图高度为0, 游客不能发消息, 历史消息记录无序, 用户发消息接口bug</label> <br/>
                 <br/>
                 <img src="../../images/star.png"/> <br/>
                 <label>(●'◡'●)ﾉ♥觉得还不错的话欢迎点赞鼓励，↓这俩货就是源码</label> <br/>
