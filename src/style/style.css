@@ -28,6 +28,17 @@ button:focus {
     box-shadow: 0 0 5px #719ECE;
 }
 
-/*.linkman:hover {
-    background-color: #D1E9E9;
-}*/
+::-webkit-scrollbar {
+    width: 8px;
+    height: 0px;
+}
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}    
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-corner {
+    background-color: rgba(0, 0, 0, 0);
+}
