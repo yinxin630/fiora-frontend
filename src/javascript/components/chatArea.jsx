@@ -18,7 +18,7 @@ export default class ChatArea extends React.Component {
         
         let maxHeight = form.scrollHeight - form.clientHeight;
         let lastElement = form.lastElementChild;
-        if (lastElement && form.scrollTop >= maxHeight - this.props.paddingBottom - lastElement.offsetHeight - 10) {
+        if (lastElement && form.scrollTop >= maxHeight - this.props.paddingBottom - lastElement.offsetHeight - 20) {
             form.scrollTop = form.scrollHeight;
         }
     }
