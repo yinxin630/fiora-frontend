@@ -4,7 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "dev": "export NODE_ENV=development && node app.js",
+      "prod": "export NODE_ENV=production && node app.js",
+      "build-dev": "export NODE_ENV=development && webpack",
+      "build-prod": "export NODE_ENV=production && webpack -p"
   },
   "repository": {
     "type": "git",

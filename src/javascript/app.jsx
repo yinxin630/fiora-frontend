@@ -26,7 +26,7 @@ import ImageViewer from './components/imageViewer.jsx';
 
 message.config({top: 80});
 
-io.sails.url = Config.server;
+io.sails.url = Config[process.env.NODE_ENV].server;
 
 export default class App extends React.Component {
     handleLinkmanClick (user) {

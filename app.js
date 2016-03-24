@@ -26,5 +26,6 @@ app.use(function *(){
     }
 });
 
-app.listen(Config.port);
-console.log('listening on port 3000');
+let port = Config[process.env.NODE_ENV].port;
+app.listen(port);
+console.log(`listening on port ${port}`);

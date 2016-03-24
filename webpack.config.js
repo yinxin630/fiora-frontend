@@ -1,10 +1,12 @@
+const webpack = require('webpack');
+
 module.exports = {
     entry: './src/javascript/app.jsx',
     output: {
         path: __dirname + '/src/',
         filename: 'app.js'
     },
-    watch: true,
+    watch: process.env.NODE_ENV === 'development' ? true : false,
     module: {
         loaders: [
             {
@@ -15,5 +17,12 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': `"${process.env.NODE_ENV}"`
+            }
+        })
+    ]
 };
