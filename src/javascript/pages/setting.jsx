@@ -36,7 +36,7 @@ export default class Setting extends React.Component {
                     <Button amStyle="primary" block onClick={ e => {
                         let avatar = this.refs.avatar.refs.input.files[0];
                         if (avatar && avatar.size > 2048000) {
-                            this.refs.info.innerText = '文件过大, 请选择小于2MB的文件';
+                            message.warn('文件过大, 请选择小于2MB的图像文件');
                             return;
                         }
                         
