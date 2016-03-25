@@ -15,7 +15,7 @@ export default class Main extends React.Component {
                 flex: 1, 
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundImage: 'url("../../images/background.jpg")',
+                backgroundImage: 'url("images/background.jpg")',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 minWidth: 540,
