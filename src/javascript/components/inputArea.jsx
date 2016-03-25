@@ -40,6 +40,22 @@ export default class InputArea extends React.Component {
         return message;
     }
     
+    handleSend (message) {
+        if (message.match(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.gif|.jpeg)$/)) {
+            let img = new Image();
+            img.src = message;
+            
+            return img.onload = () => {
+                return this.props.handleImage({
+                    image: message,
+                    width: img.width,
+                    height: img.height,
+                });
+            }
+        }
+        this.props.handleSend({text: message});
+    }
+    
     constructor (props, context) {
         super(props, context);
         this.state = {
@@ -48,7 +64,7 @@ export default class InputArea extends React.Component {
     }
     
     render () {
-        const { handleSend, handleImage } = this.props;
+        const { handleImage } = this.props;
         
         return (
             <div style={{
@@ -117,9 +133,8 @@ export default class InputArea extends React.Component {
                     ref="message" 
                     onKeyDown={ e => {
                         if (e.keyCode === 13 && !e.shiftKey) {
-                            let message = this.getMessage.bind(this)();
                             e.preventDefault();
-                            handleSend({text: message});
+                            this.refs.send.click();
                         }
                     } } 
                     maxLength={ 512 }
@@ -133,9 +148,9 @@ export default class InputArea extends React.Component {
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
                     fontSize: 22,
-                }} className="icon" onClick={e => {
-                    let message = this.getMessage.bind(this)();
-                    handleSend({text: message});
+                }} className="icon" ref="send" onClick={e => {
+                    let message = this.getMessage.bind(this)().trim();
+                    this.handleSend.bind(this)(message);
                 }}>&#xe602;</button>
             </div>
         );
