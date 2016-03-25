@@ -38,7 +38,7 @@ export default class App extends React.Component {
                 if (jwr.statusCode === 201) {
                     io.sails.token = result.token;
                     window.sessionStorage.setItem('token', result.token);
-                    this.props.history.push('/');
+                    this.context.router.push('/');
                     
                     io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
                         if (jwr.statusCode === 200) {
@@ -77,7 +77,7 @@ export default class App extends React.Component {
         io.socket.post('/user', {username: username, password}, (result, jwr) => {
             if (jwr.statusCode === 201) {
                 message.info('注册成功, 请登录');
-                this.props.history.push('/login');
+                this.context.router.push('/login');
             }
             else {
                 if (result.msg === 'invalid username') {
@@ -104,13 +104,13 @@ export default class App extends React.Component {
                 user.avatar = avatar;
             }
             
-            this.props.history.push('/');
+            this.context.router.push('/');
             return this.props.dispatch(Action.setUser(user));
         }
         
         io.socket.put('/user/0', {token: io.sails.token, nickname, avatar}, (result, jwr) => {
             if (jwr.statusCode === 200) {
-                this.props.history.push('/');
+                this.context.router.push('/');
                 return this.props.dispatch(Action.setUserInfo(result));
             }
             this.props.dispatch(Action.setUser(undefined));
@@ -183,8 +183,13 @@ export default class App extends React.Component {
         this.state = {
             src: '',
             imageViewer: false,
-        }
+        };
+        
     }
+    
+    static contextTypes = {
+        router: React.PropTypes.object
+    };
  
     componentWillMount () {
         let token = window.sessionStorage.getItem('token');
@@ -258,6 +263,8 @@ export default class App extends React.Component {
         currentLinkman = currentLinkman || Default.currentLinkman;
         isLogged = isLogged || Default.isLogged;
         comments = comments || Default.comments;
+        
+        console.log(this.context);
         
         const Child = this.props.children;
         const props = {
