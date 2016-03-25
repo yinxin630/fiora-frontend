@@ -76,6 +76,7 @@ export default class App extends React.Component {
     handleRegister (username, password, component) {
         io.socket.post('/user', {username: username, password}, (result, jwr) => {
             if (jwr.statusCode === 201) {
+                message.info('注册成功, 请登录');
                 this.props.history.push('/login');
             }
             else {

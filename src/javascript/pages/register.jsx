@@ -70,24 +70,25 @@ export default class Register extends React.Component {
                             {...formItemLayout}
                             label="用户名："
                             validateStatus={ this.state.username }>
-                            <Input type="text" ref="username" placeholder="用户名"/>
+                            <Input type="text" ref="username" placeholder="用户名" onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
                             label="密码："
                              validateStatus={ this.state.password }>
-                            <Input type="password" ref="password" placeholder="密码"/>
+                            <Input type="password" ref="password" placeholder="密码" onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
                             label="重复密码："
                              validateStatus={ this.state.confirmPassword }>
-                            <Input type="password" ref="confirmPassword" placeholder="重复密码"/>
+                            <Input type="password" ref="confirmPassword" placeholder="重复密码" onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
                         </FormItem>
                     </Form>
                     <Button 
                         amStyle="primary" 
                         block 
+                        ref="send"
                         onClick={ e => {
                             let username = this.refs.username.refs.input.value;
                             let password = this.refs.password.refs.input.value;
