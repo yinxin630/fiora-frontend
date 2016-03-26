@@ -264,8 +264,6 @@ export default class App extends React.Component {
         isLogged = isLogged || Default.isLogged;
         comments = comments || Default.comments;
         
-        console.log(this.context);
-        
         const Child = this.props.children;
         const props = {
             main: {
