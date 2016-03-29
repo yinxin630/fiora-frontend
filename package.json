@@ -4,10 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-      "dev": "export NODE_ENV=development && node app.js",
-      "prod": "export NODE_ENV=production && node app.js",
-      "build-dev": "export NODE_ENV=development && webpack",
-      "build-prod": "export NODE_ENV=production && webpack -p"
+    "dev": "export NODE_ENV=development && node app.js",
+    "prod": "export NODE_ENV=production && node app.js",
+    "build-dev": "export NODE_ENV=development && webpack",
+    "build-prod": "export NODE_ENV=production && webpack -p"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/yinxin630/fiora-frontend#readme",
   "devDependencies": {
-    "cz-conventional-changelog": "^1.1.5"
+    "cz-conventional-changelog": "^1.1.5",
+    "eslint-plugin-react": "^4.2.3"
   },
   "config": {
     "commitizen": {
