@@ -40,6 +40,12 @@ export default class Login extends React.Component {
             labelCol: { span: 6 },
             wrapperCol: { span: 15 },
         };
+        const checkboxItemLayout = {
+            labelCol: { span: 6 },
+            wrapperCol: { span: 2 },
+        };
+        const username = window.localStorage.getItem('username') || '';
+        const password = window.localStorage.getItem('password') || '';
         
         return (
             <div style={{
@@ -55,13 +61,18 @@ export default class Login extends React.Component {
                             {...formItemLayout}
                             label="用户名："
                             validateStatus={ this.state.username }>
-                            <Input type="text" ref="username" placeholder="用户名" onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
+                            <Input type="text" ref="username" placeholder="用户名" defaultValue={ username } onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
                             label="密码："
                              validateStatus={ this.state.password }>
-                            <Input type="password" ref="password" placeholder="密码" onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
+                            <Input type="password" ref="password" placeholder="密码" defaultValue={ password } onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
+                        </FormItem>
+                        <FormItem
+                            {...checkboxItemLayout}
+                            label="记住密码">
+                            <Input type="checkbox" ref="remembered"/>
                         </FormItem>
                     </Form>
                     <Button 
@@ -71,7 +82,8 @@ export default class Login extends React.Component {
                         onClick={ e => {
                             let username = this.refs.username.refs.input.value;
                             let password = this.refs.password.refs.input.value;
-                            if (!this.checkValue.bind(this)(username, password)) {
+                            let remembered = this.refs.remembered.refs.input.checked;
+                            if (!this.checkValue.bind(this)(username, password, remembered)) {
                                 return;
                             }
                             handleLogin(username, password, this);

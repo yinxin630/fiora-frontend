@@ -33,7 +33,7 @@ export default class App extends React.Component {
         this.props.dispatch(Action.setCurrentLinkman(user));
     }
     
-    handleLogin (username, password, component) {
+    handleLogin (username, password, remembered) {
         io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
                 if (jwr.statusCode === 201) {
                     io.sails.token = result.token;
@@ -42,6 +42,10 @@ export default class App extends React.Component {
                     
                     io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
                         if (jwr.statusCode === 200) {
+                            if (remembered) {
+                                window.localStorage.setItem('username', username);
+                                window.localStorage.setItem('password', password);
+                            }
                             this.props.dispatch(Action.setUser(result));
                             this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
                             return;
