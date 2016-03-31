@@ -73,6 +73,7 @@ export default class InputArea extends React.Component {
                 margin: 'auto',
                 padding: '10px 0px 16px 0px',
                 display: 'flex',
+                position: 'relative'
             }}>
                 <ExpressionForm isShow={ this.state.isShow } handleClick={ this.insertAtCursor.bind(this) }/>
                 <button style={{

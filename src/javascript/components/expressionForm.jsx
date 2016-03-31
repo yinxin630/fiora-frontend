@@ -19,6 +19,7 @@ export default class ExpressionForm extends React.Component {
                 height: 40 * 5,
                 position: 'absolute',
                 bottom: 60,
+                left: 100,
                 display: isShow ? 'flex' : 'none',
                 flexWrap: 'wrap',
                 backgroundColor: '#FFFFFF',
