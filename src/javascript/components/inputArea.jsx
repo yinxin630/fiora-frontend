@@ -84,7 +84,7 @@ export default class InputArea extends React.Component {
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
                     fontSize: 22,
-                }} className="icon"
+                }} className="icon" title="表情"
                     onClick={() => this.setState({isShow: !this.state.isShow})}
                 >&#xe603;</button>
                 <input style={{ display: 'none' }} type="file" ref="image" accept="image/*"
@@ -118,7 +118,7 @@ export default class InputArea extends React.Component {
                     border: '1px solid #aaaaaa',
                     fontSize: 22,
                 }} onClick={ e => this.refs.image.click() }
-                className="icon"
+                className="icon" title="图片"
                 >&#xe600;</button>
                 <input 
                     type="text" 
@@ -148,7 +148,7 @@ export default class InputArea extends React.Component {
                     color: '#8E8E8E',
                     border: '1px solid #aaaaaa',
                     fontSize: 22,
-                }} className="icon" ref="send" onClick={e => {
+                }} className="icon" ref="send" title="发送" onClick={e => {
                     let message = this.getMessage.bind(this)().trim();
                     this.handleSend.bind(this)(message);
                 }}>&#xe602;</button>
