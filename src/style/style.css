@@ -16,18 +16,6 @@ body {
     min-height: 600px;
 }
 
-.input-message:focus {
-    outline: none !important;
-    border: none;
-    box-shadow: 0 0 4px #719ECE;
-}
-
-button:focus {
-    outline: none !important;
-    border: none;
-    box-shadow: 0 0 5px #719ECE;
-}
-
 ::-webkit-scrollbar {
     width: 8px;
     height: 0px;
