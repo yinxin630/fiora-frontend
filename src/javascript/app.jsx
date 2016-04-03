@@ -232,7 +232,7 @@ export default class App extends React.Component {
         });
         
         io.socket.on('message', result => {
-            if (!this.props.reducer.windowVisible) {
+            if (!this.props.reducer.windowVisible || window.location.pathname !== '/') {
                 let notification = notify.createNotification(result.from.nickname, {
                     icon: result.from.avatar,
                     body: result.content.text.slice(0, 60),
