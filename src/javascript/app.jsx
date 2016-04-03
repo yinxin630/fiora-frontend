@@ -25,6 +25,7 @@ import Comment from './pages/comment.jsx';
 import ImageViewer from './components/imageViewer.jsx';
 
 message.config({top: 80});
+notification.config({top: 100});
 
 io.sails.url = Config[process.env.NODE_ENV].server;
 
