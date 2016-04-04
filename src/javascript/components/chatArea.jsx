@@ -32,7 +32,7 @@ export default class ChatArea extends React.Component {
     
     render () {
         let { messages, me } = this.props;
-        const { handleImageMessageViewer } = this.props;
+        const { handleImageMessageViewer, handleMessageClick } = this.props;
         
         return (
             <div style={{
@@ -44,6 +44,7 @@ export default class ChatArea extends React.Component {
                     messages.map((message, index) => {
                         return <Message
                             key={ index }
+                            from={ message.from }
                             avatar={ message.from.avatar }
                             nickname={ message.from.nickname }
                             time={ message.time }
@@ -51,6 +52,7 @@ export default class ChatArea extends React.Component {
                             type={ message.type }
                             align={ message.from.id === me ? 'right' : 'left' }
                             handleDoubleClick={ handleImageMessageViewer }
+                            handleMessageClick= { handleMessageClick }
                         />
                     })
                 }

@@ -183,6 +183,10 @@ export default class App extends React.Component {
         });
     }
     
+    handleMessageClick (from) {
+        this.props.dispatch(Action.addLinkman(from));
+    }
+    
     constructor (props, context) {
         super(props, context);
         this.state = {
@@ -277,6 +281,7 @@ export default class App extends React.Component {
                 handleLinkmanClick: this.handleLinkmanClick.bind(this),
                 handleSend: this.handleSend.bind(this),
                 handleImageMessageViewer: this.handleImageMessageViewer.bind(this),
+                handleMessageClick: this.handleMessageClick.bind(this)
             },
             register: {
                 handleRegister: this.handleRegister.bind(this),

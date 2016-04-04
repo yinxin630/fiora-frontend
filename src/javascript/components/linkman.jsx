@@ -14,7 +14,7 @@ export default class Linkman extends React.Component {
     
     render () {
         let { avatar, nickname, time, content } = this.props;
-        const { handleClick } = this.props;
+        const { onClick } = this.props;
         
         return (
             <div 
@@ -25,7 +25,7 @@ export default class Linkman extends React.Component {
                     backgroundColor: focus ? '' : '',
                 }} 
                 className="linkman"
-                onClick={ handleClick }
+                onClick={ onClick }
             >
                 <div style={{
                     padding: '10px',

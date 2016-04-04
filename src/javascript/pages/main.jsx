@@ -8,7 +8,7 @@ import ChatForm from '../components/chatForm.jsx';
 export default class Main extends React.Component {
     render () {
         let { user, currentLinkman } = this.props;
-        const { handleLinkmanClick, handleSend, handleImageMessageViewer } = this.props;
+        const { handleLinkmanClick, handleSend, handleImageMessageViewer, handleMessageClick } = this.props;
         
         return (
             <div style={{
@@ -18,17 +18,17 @@ export default class Main extends React.Component {
                 backgroundImage: 'url("images/background.jpg")',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
-                minWidth: 540,
+                minWidth: 540
             }}>
                 <div style={{
                     flex: 1,
                     display: 'flex',
                     minWidth: 900,
                     width: '80%',
-                    margin: '0px auto',
+                    margin: '0px auto'
                 }}>
-                    <ControlForm user={ user }/>
-                    <ChatForm me={ user.id } user={ currentLinkman } handleSend={ handleSend } handleImageMessageViewer={ handleImageMessageViewer }/>
+                    <ControlForm user={ user } handleLinkmanClick={ handleLinkmanClick }/>
+                    <ChatForm me={ user.id } user={ currentLinkman } handleSend={ handleSend } handleImageMessageViewer={ handleImageMessageViewer } handleMessageClick={ handleMessageClick }/>
                 </div>
             </div>
         );

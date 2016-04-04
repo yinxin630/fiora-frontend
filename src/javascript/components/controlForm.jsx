@@ -8,6 +8,7 @@ import UserForm from '../components/userForm.jsx';
 export default class ControlForm extends React.Component {
     render () {
         let { user } = this.props;
+        const { handleLinkmanClick } = this.props;
         
         return (
             <div style={{
@@ -19,7 +20,7 @@ export default class ControlForm extends React.Component {
                 backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
                 <UserForm avatar={ user.avatar } nickname={ user.nickname }/>
-                <LinkmanForm groups={ user.groups }/>
+                <LinkmanForm groups={ user.groups } linkmans={ user.linkmans } handleLinkmanClick={ handleLinkmanClick }/>
             </div>
         );
     }

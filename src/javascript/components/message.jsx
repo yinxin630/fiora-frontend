@@ -3,6 +3,7 @@
 const React = require('react');
 const Moment = require('moment');
 
+import { Menu, Dropdown } from 'antd';
 import Avatar from './avatar.jsx';
 
 export default class Message extends React.Component {
@@ -48,6 +49,12 @@ export default class Message extends React.Component {
         }
     }
     
+    handleMenuClick ({ key }) {
+        if (key === '1') {
+            this.props.handleMessageClick(this.props.from);
+        }
+    }
+    
     static defaultProps = {
         avatar: 'http://chat.suisuijiang.com/images/head.png',
         nickname: '默认昵称',
@@ -67,6 +74,11 @@ export default class Message extends React.Component {
             text = text.replace(/#\([\u4e00-\u9fa5a-z]+\)/g, r => `<img src="images/expressions/${r.match(/[^#()]+/)[0]}.png" onerror="this.style.display=\'none\'"/>` );
             copyCotent.text = text;
         }
+        const menu = (
+            <Menu onClick={ this.handleMenuClick.bind(this) }>
+                <Menu.Item key="1">发送消息</Menu.Item>
+            </Menu>
+        );
         
         return (
             <div style={{
@@ -75,9 +87,13 @@ export default class Message extends React.Component {
                 marginTop: 10,
                 flexDirection: align !== 'right' || 'row-reverse', 
             }}>
-                <Avatar src={ avatar }
-                    width={40} height={40}
-                />
+                <Dropdown overlay={menu} trigger={['click']}>
+                    <a style={{width: 40, height: 40}}>
+                        <Avatar src={ avatar }
+                            width={40} height={40}
+                        />
+                    </a>
+                </Dropdown>
                 <div style={{
                     width: 'calc(100% - 40px * 2)',
                     maxWidth: '500px',
