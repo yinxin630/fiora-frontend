@@ -22,6 +22,7 @@ function reducer(state = {}, action) {
     }
     case Action.types.SetCurrentLinkman: {
         state.currentLinkman = action.user;
+        state.currentLinkman.isGroup = action.isGroup;
         return Object.assign({}, state);
     }
     case Action.types.SetLoginStatus: {

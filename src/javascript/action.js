@@ -31,10 +31,11 @@ module.exports = {
         };
     },
     
-    setCurrentLinkman: function (user) {
+    setCurrentLinkman: function (user, isGroup) {
         return {
             type: this.types.SetCurrentLinkman,
-            user: user
+            user: user,
+            isGroup: isGroup
         };
     },
     

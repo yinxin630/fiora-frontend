@@ -30,8 +30,8 @@ notification.config({top: 100});
 io.sails.url = Config[process.env.NODE_ENV].server;
 
 export default class App extends React.Component {
-    handleLinkmanClick (user) {
-        this.props.dispatch(Action.setCurrentLinkman(user));
+    handleLinkmanClick (user, isGroup) {
+        this.props.dispatch(Action.setCurrentLinkman(user, isGroup));
     }
     
     handleLogin (username, password, remembered) {
@@ -48,7 +48,7 @@ export default class App extends React.Component {
                                 window.localStorage.setItem('password', password);
                             }
                             this.props.dispatch(Action.setUser(result));
-                            this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                            this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
                             return;
                         }
                         this.props.dispatch(Action.setUser(undefined));
@@ -122,7 +122,7 @@ export default class App extends React.Component {
         });
     }
     
-    handleSend (content, type, linkman) {
+    handleSend (content, type, linkman, isToGroup) {
         if (!content || content.text === '') {
             return;
         }
@@ -209,7 +209,7 @@ export default class App extends React.Component {
                 return io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
                     if (jwr.statusCode === 200) {
                         this.props.dispatch(Action.setUser(result));
-                        this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                        this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
                         this.props.dispatch(Action.setLoginStatus(true));
                         return;
                     }
@@ -221,7 +221,7 @@ export default class App extends React.Component {
             io.socket.get('/guest', {}, (result, jwr) => {
                 if (jwr.statusCode === 200) {
                     this.props.dispatch(Action.setUser(result));
-                    this.props.dispatch(Action.setCurrentLinkman(result.groups[0]));
+                    this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
                     this.props.dispatch(Action.setLoginStatus(false));
                     notification['info']({
                         message: '提示',
