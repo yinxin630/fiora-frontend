@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "export NODE_ENV=development && node app.js",
     "prod": "export NODE_ENV=production && node app.js",
-    "build-dev": "export NODE_ENV=development && webpack",
+    "build-dev": "export NODE_ENV=development && webpack -d",
     "build-prod": "export NODE_ENV=production && webpack -p"
   },
   "repository": {
