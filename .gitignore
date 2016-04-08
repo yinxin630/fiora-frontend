@@ -2,3 +2,4 @@ node_modules
 typings
 
 src/app.js
+src/app.js.map
