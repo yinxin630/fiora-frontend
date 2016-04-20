@@ -23,7 +23,7 @@ export default class LinkmanForm extends React.Component {
             }}>
                 {
                     groups.map((group, index) => {
-                        let lastMessage = group.messages[group.messages.length - 1] || {time: '', content: {text: ''}, type: 'text'};
+                        let lastMessage = group.messages[group.messages.length - 1] || {time: Date.now(), content: {text: ''}, type: 'text'};
                         
                         return <Linkman
                             key={ index }

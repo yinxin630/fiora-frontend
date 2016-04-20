@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react');
+import React from 'react';
 import Header from '../components/header.jsx';
 import { Form, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
@@ -9,16 +9,16 @@ export default class Login extends React.Component {
     checkValue (username, password) {
         this.setState({
             username: undefined,
-            password: undefined,
+            password: undefined
         });
         
-        if (username === "") {
+        if (username === '') {
             message.error('请输入用户名');
             this.setState({username: 'error'});
             return false;
         } 
         
-        if (password === "") {
+        if (password === '') {
             message.error('请输入密码');
             this.setState({password: 'error'});
             return false;
@@ -30,7 +30,7 @@ export default class Login extends React.Component {
         super(props);
         this.state = {
             username: undefined,
-            password: undefined,
+            password: undefined
         };
     }
     
@@ -38,36 +38,36 @@ export default class Login extends React.Component {
         const { handleLogin } = this.props;
         const formItemLayout = {
             labelCol: { span: 6 },
-            wrapperCol: { span: 15 },
+            wrapperCol: { span: 15 }
         };
         const checkboxItemLayout = {
             labelCol: { span: 6 },
-            wrapperCol: { span: 2 },
+            wrapperCol: { span: 2 }
         };
         const username = window.localStorage.getItem('username') || '';
         const password = window.localStorage.getItem('password') || '';
         
         return (
             <div style={{
-                flex: 1,
+                flex: 1
             }}>
                 <div style={{
                     width: 400,
                     margin: '100px auto',
-                    textAlign: 'center',
+                    textAlign: 'center'
                 }}>
                     <Form horizontal>
                         <FormItem
                             {...formItemLayout}
                             label="用户名："
                             validateStatus={ this.state.username }>
-                            <Input type="text" ref="username" placeholder="用户名" defaultValue={ username } onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
+                            <Input type="text" ref="username" placeholder="用户名" defaultValue={ username } onKeyDown={ e => { if(e.keyCode === 13) this.refs.send.props.onClick(); }}/>
                         </FormItem>
                         <FormItem
                             {...formItemLayout}
                             label="密码："
                              validateStatus={ this.state.password }>
-                            <Input type="password" ref="password" placeholder="密码" defaultValue={ password } onKeyDown={ e => { if(e.keyCode === 13) console.log(this.refs.send.props.onClick()) }}/>
+                            <Input type="password" ref="password" placeholder="密码" defaultValue={ password } onKeyDown={ e => { if(e.keyCode === 13) this.refs.send.props.onClick(); }}/>
                         </FormItem>
                         <FormItem
                             {...checkboxItemLayout}
@@ -79,7 +79,7 @@ export default class Login extends React.Component {
                         amStyle="primary" 
                         block
                         ref="send" 
-                        onClick={ e => {
+                        onClick={ () => {
                             let username = this.refs.username.refs.input.value;
                             let password = this.refs.password.refs.input.value;
                             let remembered = this.refs.remembered.refs.input.checked;
@@ -91,6 +91,6 @@ export default class Login extends React.Component {
                     >登录</Button>
                 </div>
             </div>
-        )
+        );
     }
 }

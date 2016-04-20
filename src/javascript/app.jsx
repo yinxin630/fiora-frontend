@@ -127,25 +127,26 @@ export default class App extends React.Component {
             return;
         }
         
-        if (!this.props.reducer.isLogged) {
-            return io.socket.post('/temporary', {
-                from: {
-                    id: this.props.reducer.user.id,
-                    nickname: this.props.reducer.user.nickname,
-                    avatar: this.props.reducer.user.avatar,
-                },
-                content: content,
-                type: type,
-            }, (result, jwr) => { });
-        }
-        
-        io.socket.post('/message', {
+        let user = this.props.reducer.user;
+        return io.socket.post('/message', {
                 token: io.sails.token,
-                from: this.props.reducer.user.id,
+                isToGroup: isToGroup,
+                from: {
+                    id: user.id,
+                    nickname: user.nickname,
+                    avatar: user.avatar
+                },
                 to: linkman.id,
                 content: content,
                 type: type,
-            }, (result, jwr) => { }
+            }, (result, jwr) => {
+                if (result.msg === 'user not online') {
+                    message.warn('对方不在线');
+                }
+                if (result.toUser) {
+                    this.props.dispatch(Action.addUserMessage(result.toUser, result));
+                }
+             }
         );
     }
     
@@ -185,6 +186,7 @@ export default class App extends React.Component {
     
     handleMessageClick (from) {
         this.props.dispatch(Action.addLinkman(from));
+        this.props.dispatch(Action.setCurrentLinkman(from, false));
     }
     
     constructor (props, context) {
@@ -202,37 +204,28 @@ export default class App extends React.Component {
  
     componentWillMount () {
         let token = window.sessionStorage.getItem('token');
-        io.socket.get('/auth', {token}, (result, jwr) => {
+        this.props.dispatch(Action.setToken(token));
+        
+        io.socket.get('/user', {token}, (result, jwr) => {
             if (jwr.statusCode === 200) {
                 io.sails.token = token;
                 
-                return io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
-                    if (jwr.statusCode === 200) {
-                        this.props.dispatch(Action.setUser(result));
-                        this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
-                        this.props.dispatch(Action.setLoginStatus(true));
-                        return;
-                    }
-                    this.props.dispatch(Action.setUser(undefined));
-                    this.props.dispatch(Action.setLoginStatus(false));
-                })
-            }
-            
-            io.socket.get('/guest', {}, (result, jwr) => {
-                if (jwr.statusCode === 200) {
-                    this.props.dispatch(Action.setUser(result));
-                    this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
-                    this.props.dispatch(Action.setLoginStatus(false));
+                if (result.id.toString().startsWith('guest')) {
                     notification['info']({
                         message: '提示',
                         description: '您正在以游客的身份登录聊天室, 游客的消息记录/昵称/头像不会被保存, 欢迎注册帐号使用',
                         duration: 8,
                     });
-                    return;
                 }
+                
+                this.props.dispatch(Action.setUser(result));
+                this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
+                this.props.dispatch(Action.setLoginStatus(!result.id.toString().startsWith('guest')));
+            }
+            else {
                 this.props.dispatch(Action.setUser(undefined));
                 this.props.dispatch(Action.setLoginStatus(false));
-            })
+            }
         });
         
         io.socket.on('message', result => {
@@ -243,10 +236,13 @@ export default class App extends React.Component {
                     tag: result.from.id,
                 });
             }
-            this.props.dispatch(Action.addGroupMessage(result.toGroup, result));
+            if (result.toGroup) {
+                this.props.dispatch(Action.addGroupMessage(result.toGroup, result));
+            }
+            else {
+                this.props.dispatch(Action.addUserMessage(result.from.id, result));
+            }
         });
-        
-        
     }
     
     componentDidMount () {
