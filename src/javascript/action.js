@@ -1,13 +1,22 @@
 module.exports = {
     types: {
+        SetToken: 'SetToken',
         SetUser: 'SetUser',
         SetUserInfo: 'SetUserInfo',
         AddLinkman: 'AddLinkman',
         SetCurrentLinkman: 'SetCurrentLinkman',
         SetLoginStatus: 'SetLoginStatus',
         AddGroupMessage: 'AddGroupMessage',
+        AddUserMessage: 'AddUserMessage',
         SetWindowVisible: 'SetWindowVisible',
         SetComments: 'SetComments'
+    },
+    
+    setToken: function (token) {
+        return {
+            type: this.types.SetToken,
+            token: token
+        };
     },
     
     setUser: function (user) {
@@ -50,6 +59,14 @@ module.exports = {
         return {
             type: this.types.AddGroupMessage,
             group: group,
+            message: message
+        };
+    },
+    
+    addUserMessage: function (user, message) {
+        return {
+            type: this.types.AddUserMessage,
+            user: user, 
             message: message
         };
     },

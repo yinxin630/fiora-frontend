@@ -5,6 +5,9 @@ import { combineReducers, createStore } from 'redux';
 
 function reducer(state = {}, action) {
     switch (action.type) {
+    case Action.types.SetToken: {
+        return Object.assign({}, state, {token: action.token});
+    }
     case Action.types.SetUser: {
         return Object.assign({}, state, {user: action.user});
     }
@@ -33,6 +36,16 @@ function reducer(state = {}, action) {
         let group = state.user.groups.find(x => x.id === action.group.id);
         group.messages = group.messages || [];
         group.messages.push(action.message);
+        return Object.assign({}, state);
+    }
+    case Action.types.AddUserMessage: {
+        let user = state.user.linkmans.find(x => x.id === action.user);
+        if (!user) {
+            state.user.linkmans.push(action.message.from);
+            user = state.user.linkmans.find(x => x.id === action.user);
+        }
+        user.messages = user.messages || [];
+        user.messages.push(action.message);
         return Object.assign({}, state);
     }
     case Action.types.SetWindowVisible: {
