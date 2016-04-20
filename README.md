@@ -24,5 +24,5 @@ Fiora聊天室前端
 2. 进入项目目录 `cd fiora-frontend`
 3. 安装依赖库 `npm install`
 4. 修改配置, 编辑`config.js`, 设置端口`port`, 设置后端地址`server`
-5. 使用webpack打包文件, 执行`./node_module/.bin/webpack` 
-6. 运行项目 `node app.js`
+5. 使用webpack打包文件, 执行`npm run build-dev` or `npm run build-prod` 
+6. 运行静态资源服务器 `npm run dev` or `npm run prod`

@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "export NODE_ENV=development && node app.js",
     "prod": "export NODE_ENV=production && node app.js",
-    "build-dev": "export NODE_ENV=development && webpack --devtool eval-source-map --progress --color",
-    "build-prod": "export NODE_ENV=production && webpack -p"
+    "build-dev": "export NODE_ENV=development && ./node_modules/.bin/webpack --devtool eval-source-map --progress --color",
+    "build-prod": "export NODE_ENV=production && ./node_modules/.bin/webpack -p"
   },
   "repository": {
     "type": "git",
