@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import Radium from 'radium';
 import ExpressionForm from './expressionForm.jsx';
 
 class InputArea extends React.Component {
