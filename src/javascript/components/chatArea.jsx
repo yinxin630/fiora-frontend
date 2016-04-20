@@ -46,7 +46,7 @@ export default class ChatArea extends React.Component {
                             key={ index }
                             from={ message.from }
                             avatar={ message.from.avatar }
-                            nickname={ message.from.nickname }
+                            username={ message.from.username }
                             time={ message.time }
                             content={ message.content }
                             type={ message.type }

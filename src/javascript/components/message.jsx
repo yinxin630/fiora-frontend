@@ -55,16 +55,8 @@ export default class Message extends React.Component {
         }
     }
     
-    static defaultProps = {
-        avatar: 'http://chat.suisuijiang.com/images/head.png',
-        nickname: '默认昵称',
-        time: '12:12:12',
-        content: '默认消息内容',
-        align: 'left',
-    }
-    
     render () {
-        let { align, avatar, nickname, time, content, type} = this.props;
+        let { align, avatar, username, time, content, type} = this.props;
         let copyCotent = Object.assign({}, content);
         if (type === 'text') {
             let text = copyCotent.text;
@@ -105,7 +97,7 @@ export default class Message extends React.Component {
                         <span style={{
                             fontSize: '1.5rem',
                         }}>
-                            { nickname }
+                            { username }
                         </span>
                         <span style={{
                             marginLeft: 5,

@@ -19,7 +19,7 @@ export default class ChatForm extends React.Component {
                 flexDirection: 'column',
                 backgroundColor: 'rgba(253, 255, 255, 0.7)',
             }}>
-                <TopArea avatar={ user.avatar } nickname={ user.nickname }/>
+                <TopArea avatar={ user.avatar } username={ user.nickname || user.username }/>
                 <ChatArea messages={ user.messages } me={ me } handleImageMessageViewer={ handleImageMessageViewer } handleMessageClick={ handleMessageClick }/>
                 <InputArea handleSend={ message => handleSend(message, 'text', user, user.isGroup) } handleImage={ image => handleSend(image, 'image', user, user.isGroup) }/>
             </div>

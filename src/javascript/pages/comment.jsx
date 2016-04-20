@@ -41,9 +41,9 @@ export default class Comment extends React.Component {
                 }}>
                     <Collapse accordion defaultActiveKey={['0']}>
                         {
-                            comments.map((comment, index, comments) => {
+                            comments.map((comment, index) => {
                                 return (
-                                    <Panel header={ `${comment.from.nickname || '游客'} ${Moment(comment.time).format('GGGG-MM-DD HH:mm:ss')}` } key={ index }>
+                                    <Panel header={ `${comment.from.username || '游客'} ${Moment(comment.time).format('GGGG-MM-DD HH:mm:ss')}` } key={ index }>
                                         <p>{ comment.content }</p>
                                     </Panel>
                                 );

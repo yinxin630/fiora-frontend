@@ -4,16 +4,8 @@ const React = require('react');
 import Avatar from './avatar.jsx';
 
 export default class Linkman extends React.Component {
-    static defaultProps = {
-        avatar: 'http://chat.suisuijiang.com/images/head.png',
-        nickname: '默认昵称',
-        time: '12:12:12',
-        content: '默认内容',
-        focus: false,
-    };
-    
     render () {
-        let { avatar, nickname, time, content } = this.props;
+        let { avatar, username, time, content } = this.props;
         const { onClick } = this.props;
         
         return (
@@ -22,7 +14,7 @@ export default class Linkman extends React.Component {
                     display: 'flex',
                     borderBottom: '1px solid silver',
                     height: 60,
-                    backgroundColor: focus ? '' : '',
+                    backgroundColor: focus ? '' : ''
                 }} 
                 className="linkman"
                 onClick={ onClick }
@@ -50,7 +42,7 @@ export default class Linkman extends React.Component {
                         <div style={{
                             fontSize: '1.3rem',
                             color: '#687275',
-                        }}>{ nickname }</div>
+                        }}>{ username }</div>
                         <div style={{
                             color: '#687275',
                         }}>{ time }</div>

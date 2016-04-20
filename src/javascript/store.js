@@ -12,7 +12,6 @@ function reducer(state = {}, action) {
         return Object.assign({}, state, {user: action.user});
     }
     case Action.types.SetUserInfo: {
-        state.user.nickname = action.user.nickname;
         state.user.avatar = action.user.avatar;
         return Object.assign({}, state);
     }

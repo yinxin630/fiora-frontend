@@ -24,11 +24,6 @@ export default class Setting extends React.Component {
                     <Form horizontal>
                         <FormItem
                             {...formItemLayout}
-                            label="昵称：">
-                            <Input type="text" ref="nickname" placeholder="新昵称" maxLength={12}/>
-                        </FormItem>
-                        <FormItem
-                            {...formItemLayout}
                             label="头像：">
                             <Input type="file" ref="avatar" accept="image/*"/>
                         </FormItem>
@@ -40,13 +35,12 @@ export default class Setting extends React.Component {
                             return;
                         }
                         
-                        let nickname = this.refs.nickname.refs.input.value;
                         if (!avatar) {
-                            return handleSetting(nickname, '');
+                            return handleSetting('');
                         }
                         let reader = new FileReader();
                         reader.onloadend = function() {
-                            return handleSetting(nickname, this.result);
+                            return handleSetting(this.result);
                         };
                         reader.readAsDataURL(avatar);
                     } }>保存</Button>

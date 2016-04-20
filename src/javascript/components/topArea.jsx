@@ -5,12 +5,6 @@ const React = require('react');
 import Avatar from './avatar.jsx';
 
 export default class TopArea extends React.Component {
-    static defaultProps = {
-        avatar: '',
-        nickname: '',
-        noNickname: false,
-    }
-    
     render () {
         return (
             <div style={{
@@ -33,7 +27,7 @@ export default class TopArea extends React.Component {
                             width={40} height={40}
                         />
                     </div>
-                    <span style={{fontSize: '2rem'}}>{ this.props.nickname }</span>
+                    <span style={{fontSize: '2rem'}}>{ this.props.username }</span>
                 </div>
                 <div>
                 </div>

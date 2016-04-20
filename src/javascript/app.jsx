@@ -99,12 +99,9 @@ export default class App extends React.Component {
         });
     }
     
-    handleSetting (nickname, avatar) {
+    handleSetting (avatar) {
         if (!this.props.reducer.isLogged) {
             let user = this.props.reducer.user;
-            if (nickname !== '') {
-                user.nickname = nickname;
-            }
             if (avatar !== '') {
                 user.avatar = avatar;
             }
@@ -113,7 +110,7 @@ export default class App extends React.Component {
             return this.props.dispatch(Action.setUser(user));
         }
         
-        io.socket.put('/user/0', {token: io.sails.token, nickname, avatar}, (result, jwr) => {
+        io.socket.put('/user/0', {token: io.sails.token, avatar}, (result, jwr) => {
             if (jwr.statusCode === 200) {
                 this.context.router.push('/');
                 return this.props.dispatch(Action.setUserInfo(result));
@@ -133,7 +130,7 @@ export default class App extends React.Component {
                 isToGroup: isToGroup,
                 from: {
                     id: user.id,
-                    nickname: user.nickname,
+                    username: user.username,
                     avatar: user.avatar
                 },
                 to: linkman.id,
@@ -230,7 +227,7 @@ export default class App extends React.Component {
         
         io.socket.on('message', result => {
             if (!this.props.reducer.windowVisible || window.location.pathname !== '/') {
-                let notification = notify.createNotification(result.from.nickname, {
+                let notification = notify.createNotification(result.from.username, {
                     icon: result.from.avatar,
                     body: result.content.text.slice(0, 60),
                     tag: result.from.id,

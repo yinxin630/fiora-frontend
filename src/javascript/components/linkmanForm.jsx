@@ -28,7 +28,7 @@ export default class LinkmanForm extends React.Component {
                         return <Linkman
                             key={ index }
                             avatar={ group.avatar }
-                            nickname={ group.nickname }
+                            username={ group.nickname }
                             time={ Moment(lastMessage.time).format('HH:mm') }
                             content={ lastMessage.content.text.slice(0, 12) }
                             onClick={ () => handleLinkmanClick(group, true) }
@@ -39,7 +39,7 @@ export default class LinkmanForm extends React.Component {
                     linkmans.map((linkman, index) => {
                         let lastMessage = linkman.messages[linkman.messages.length - 1] || {time: Date.now(), content: {text: ''}, type: 'text'};
                         
-                        return <Linkman key={ index } avatar={ linkman.avatar } nickname={ linkman.nickname } time={ Moment(lastMessage.time).format('HH:mm') } content={ lastMessage.content.text.slice(0, 12) } onClick={ () => handleLinkmanClick(linkman, false) }/>;
+                        return <Linkman key={ index } avatar={ linkman.avatar } username={ linkman.username } time={ Moment(lastMessage.time).format('HH:mm') } content={ lastMessage.content.text.slice(0, 12) } onClick={ () => handleLinkmanClick(linkman, false) }/>;
                     })
                 }
             </div>

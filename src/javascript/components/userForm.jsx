@@ -7,7 +7,7 @@ import Avatar from './avatar.jsx';
 
 export default class UserForm extends React.Component {
     render () {
-        let { avatar, nickname } = this.props;
+        let { avatar, username } = this.props;
         
         return (
             <div style={{
@@ -25,19 +25,19 @@ export default class UserForm extends React.Component {
                     alignItems: 'center',
                 }}>
                     <Avatar style ={{
-                        margin: 10,
+                        margin: 10
                     }} src={ avatar }
                         width={60} height={60}
                     />
                     <span style={{fontSize: '1.5rem'}}>
-                        { nickname }
+                        { username }
                     </span>
                 </div>
                 <Link to="setting" style={{
                     marginRight: 5,
                     color: '#333333',
                     cursor: 'pointer',
-                    fontSize: 34,
+                    fontSize: 34
                 }} className="icon">
                     &#xe601;
                 </Link>

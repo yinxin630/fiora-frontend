@@ -17,9 +17,9 @@ export default class ControlForm extends React.Component {
                 flexDirection: 'column',
                 borderCollapse: 'collapse',
                 borderRight: '1px solid silver',
-                backgroundColor: 'rgba(253, 255, 255, 0.7)',
+                backgroundColor: 'rgba(253, 255, 255, 0.7)'
             }}>
-                <UserForm avatar={ user.avatar } nickname={ user.nickname }/>
+                <UserForm avatar={ user.avatar } username={ user.username }/>
                 <LinkmanForm groups={ user.groups } linkmans={ user.linkmans } handleLinkmanClick={ handleLinkmanClick }/>
             </div>
         );
