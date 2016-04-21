@@ -10,24 +10,26 @@ export default class ChatArea extends React.Component {
     }
     
     componentDidUpdate () {
+        let needScroll = false;
         let form = this.refs.chatform;
         let lastMessage = this.props.messages[this.props.messages.length - 1];
         if (lastMessage && lastMessage.from.id === this.props.me) {
-            return form.scrollTop = form.scrollHeight;
+            needScroll = true;
         }
-        
+        if (form.scrollTop === 0) {
+            needScroll = true;
+        }
         let maxHeight = form.scrollHeight - form.clientHeight;
         let lastElement = form.lastElementChild;
         if (lastElement && form.scrollTop >= maxHeight - this.props.paddingBottom - lastElement.offsetHeight - 20) {
-            form.scrollTop = form.scrollHeight;
+            needScroll = true;
         }
-    }
-    
-    componentDidMount () {
-        setTimeout(() => {
-            let form = this.refs.chatform;
-            form.scrollTop = form.scrollHeight;
-        }, 100);
+        
+        if (needScroll) {
+            setTimeout(() => {
+                form.scrollTop = form.scrollHeight;
+            }, 100);
+        }
     }
     
     render () {
