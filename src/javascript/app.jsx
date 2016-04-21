@@ -85,16 +85,7 @@ export default class App extends React.Component {
                 this.context.router.push('/login');
             }
             else {
-                if (result.msg === 'invalid username') {
-                    return message.warn('用户名包含非法字符或者长度不合格');
-                }
-                else if (result.msg === 'invalid password') {
-                    return message.warn('密码包含非法字符或者长度不合格');
-                }
-                else if (result.msg.match(/A record with that `username` already exists/)) {
-                    return message.warn('该用户名已存在');
-                }
-                message.warn('注册失败, 请重试');
+                message.warn(result.msg);
             }
         });
     }
