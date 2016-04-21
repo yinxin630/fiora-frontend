@@ -32,6 +32,13 @@ export default class ChatArea extends React.Component {
         }
     }
     
+    componentDidMount () {
+        let form = this.refs.chatform;
+        setTimeout(() => {
+            form.scrollTop = form.scrollHeight;
+        }, 100);
+    }
+    
     render () {
         let { messages, me } = this.props;
         const { handleImageMessageViewer, handleMessageClick } = this.props;
