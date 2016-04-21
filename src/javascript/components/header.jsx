@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const React = require('react');
 import { Link } from 'react-router';
@@ -7,11 +7,11 @@ const BackgroundColor = '#111111';
 const AppNameColor = '#FFFFFF';
 const LinkStyle = {
     marginLeft: '10px',
-    fontSize: '1.5rem',
+    fontSize: '1.5rem'
 };
 const partitionStyle = {
-    marginLeft: 30,
-}
+    marginLeft: 30
+};
 
 export default class Header extends React.Component {
     render () {
@@ -21,23 +21,24 @@ export default class Header extends React.Component {
             <div style={{
                 backgroundColor: BackgroundColor,
                 boxShadow: `0px 0px 10px ${BackgroundColor}`,
-                height: 60,
+                height: 60
             }}>
                 <div style={{
                     width: '70%',
+                    minWidth: 900,
                     margin: 'auto',
                     padding: '0px 20px',
                     display: 'flex',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-between'
                 }}>
                     <h1 style={{
                         fontSize: '3.5rem',
                         padding: '6px 0px',
-                        color: AppNameColor,
+                        color: AppNameColor
                     }}>FIORA</h1>
                     <nav style={{
                         display: 'flex',
-                        alignItems: 'center',
+                        alignItems: 'center'
                     }}>
                         <Link style={LinkStyle} to="/">首页</Link>
                         <Link style={LinkStyle} to="/about">关于</Link>

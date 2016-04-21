@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const React = require('react');
 
@@ -13,13 +13,13 @@ export default class ImageViewer extends React.Component {
                 height: '100vh',
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 position: 'absolute',
-                display: display ? 'flex' : 'none',
+                display: display ? 'flex' : 'none'
             }}>
                 <div style={{
                     maxWidth: '80vw',
                     maxHeight: '80vh',
                     margin: 'auto',
-                    overflow: 'auto',
+                    overflow: 'scroll'
                 }}>
                     <img 
                         style={{
@@ -34,7 +34,7 @@ export default class ImageViewer extends React.Component {
                         top: 10,
                         color: 'white',
                         fontSize: 44,
-                        cursor: 'pointer',
+                        cursor: 'pointer'
                     }}
                     onClick={ handleClose }
                 >
