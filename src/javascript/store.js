@@ -3,7 +3,9 @@
 const Action = require('./action.js');
 import { combineReducers, createStore } from 'redux';
 
-function reducer(state = {}, action) {
+function reducer(state = {
+    showNotification: true
+}, action) {
     switch (action.type) {
     case Action.types.SetToken: {
         return Object.assign({}, state, {token: action.token});
@@ -53,6 +55,10 @@ function reducer(state = {}, action) {
     }
     case Action.types.SetComments: {
         state.comments = action.comments;
+        return Object.assign({}, state);
+    }
+    case Action.types.ToggleNotification: {
+        state.showNotification = !state.showNotification;
         return Object.assign({}, state);
     }
     default:

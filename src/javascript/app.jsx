@@ -110,6 +110,10 @@ export default class App extends React.Component {
         });
     }
     
+    handleToggleNotification () {
+        this.props.dispatch(Action.toggleNotification());
+    }
+    
     handleSend (content, type, linkman, isToGroup) {
         if (!content || content.text === '') {
             return;
@@ -217,7 +221,7 @@ export default class App extends React.Component {
         });
         
         io.socket.on('message', result => {
-            if (!this.props.reducer.windowVisible || window.location.pathname !== '/') {
+            if (this.props.reducer.showNotification && (!this.props.reducer.windowVisible || window.location.pathname !== '/')) {
                 let notification = notify.createNotification(result.from.username, {
                     icon: result.from.avatar,
                     body: result.content.text.slice(0, 60),
@@ -251,7 +255,7 @@ export default class App extends React.Component {
     }
     
     render() {
-        let { user, currentLinkman, isLogged, comments } = this.props.reducer;
+        let { user, currentLinkman, isLogged, comments, showNotification } = this.props.reducer;
         user = user || Default.user;
         currentLinkman = currentLinkman || Default.currentLinkman;
         isLogged = isLogged || Default.isLogged;
@@ -275,6 +279,8 @@ export default class App extends React.Component {
             },
             setting: {
                 handleSetting: this.handleSetting.bind(this),
+                handleToggleNotification: this.handleToggleNotification.bind(this),
+                showNotification
             },
             comment: {
                 handleComment: this.handleComment.bind(this),

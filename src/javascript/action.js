@@ -9,7 +9,8 @@ module.exports = {
         AddGroupMessage: 'AddGroupMessage',
         AddUserMessage: 'AddUserMessage',
         SetWindowVisible: 'SetWindowVisible',
-        SetComments: 'SetComments'
+        SetComments: 'SetComments',
+        ToggleNotification: 'ToggleNotification',
     },
     
     setToken: function (token) {
@@ -82,6 +83,12 @@ module.exports = {
         return {
             type: this.types.SetComments,
             comments: comments
+        };
+    },
+    
+    toggleNotification: function () {
+        return {
+            type: this.types.ToggleNotification
         };
     }
 };
