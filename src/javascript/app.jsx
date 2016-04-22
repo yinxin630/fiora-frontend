@@ -34,25 +34,12 @@ export default class App extends React.Component {
         this.props.dispatch(Action.setCurrentLinkman(user, isGroup));
     }
     
-    handleLogin (username, password, remembered) {
+    handleLogin (username, password) {
         io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
                 if (jwr.statusCode === 201) {
                     io.sails.token = result.token;
                     window.localStorage.setItem('token', result.token);
                     this.context.router.push('/');
-                    
-                    io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
-                        if (jwr.statusCode === 200) {
-                            if (remembered) {
-                                window.localStorage.setItem('username', username);
-                                window.localStorage.setItem('password', password);
-                            }
-                            this.props.dispatch(Action.setUser(result));
-                            this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
-                            return;
-                        }
-                        this.props.dispatch(Action.setUser(undefined));
-                    });
                 }
                 else {
                     if (result.msg.match(/user.*not exists/)) {
