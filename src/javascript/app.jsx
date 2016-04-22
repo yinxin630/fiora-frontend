@@ -38,7 +38,7 @@ export default class App extends React.Component {
         io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
                 if (jwr.statusCode === 201) {
                     io.sails.token = result.token;
-                    window.sessionStorage.setItem('token', result.token);
+                    window.localStorage.setItem('token', result.token);
                     this.context.router.push('/');
                     
                     io.socket.get('/user', {token: io.sails.token}, (result, jwr) => {
@@ -191,7 +191,7 @@ export default class App extends React.Component {
     };
  
     componentWillMount () {
-        let token = window.sessionStorage.getItem('token');
+        let token = window.localStorage.getItem('token');
         this.props.dispatch(Action.setToken(token));
         
         io.socket.get('/user', {token}, (result, jwr) => {
