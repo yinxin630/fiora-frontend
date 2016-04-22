@@ -12,7 +12,6 @@ export default class ChatForm extends React.Component {
         const { handleSend, handleImageMessageViewer, handleMessageClick } = this.props;
         
         return (
-            user ? 
             <div style={{
                 flex: 1,
                 display: 'flex',
@@ -22,14 +21,6 @@ export default class ChatForm extends React.Component {
                 <TopArea avatar={ user.avatar } username={ user.nickname || user.username }/>
                 <ChatArea messages={ user.messages } me={ me } handleImageMessageViewer={ handleImageMessageViewer } handleMessageClick={ handleMessageClick }/>
                 <InputArea handleSend={ message => handleSend(message, 'text', user, user.isGroup) } handleImage={ image => handleSend(image, 'image', user, user.isGroup) }/>
-            </div>
-            :
-            <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: '#FDFFFF',
-            }}>
             </div>
         );
     }

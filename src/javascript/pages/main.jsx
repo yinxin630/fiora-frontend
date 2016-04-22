@@ -4,6 +4,7 @@ const React = require('react');
 
 import ControlForm from '../components/controlForm.jsx';
 import ChatForm from '../components/chatForm.jsx';
+import Loading from '../components/loading.jsx';
 
 export default class Main extends React.Component {
     render () {
@@ -28,7 +29,12 @@ export default class Main extends React.Component {
                     margin: '0px auto'
                 }}>
                     <ControlForm user={ user } handleLinkmanClick={ handleLinkmanClick }/>
-                    <ChatForm me={ user.id } user={ currentLinkman } handleSend={ handleSend } handleImageMessageViewer={ handleImageMessageViewer } handleMessageClick={ handleMessageClick }/>
+                    {
+                        currentLinkman ?
+                        <ChatForm me={ user.id } user={ currentLinkman } handleSend={ handleSend } handleImageMessageViewer={ handleImageMessageViewer } handleMessageClick={ handleMessageClick }/>
+                        :
+                        <Loading/>
+                    }
                 </div>
             </div>
         );
