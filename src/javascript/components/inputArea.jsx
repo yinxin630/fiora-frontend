@@ -3,6 +3,7 @@
 import React from 'react';
 import Radium from 'radium';
 import ExpressionForm from './expressionForm.jsx';
+const Once = require('once-event-listener');
 
 class InputArea extends React.Component {
     constructor (props, context) {
@@ -15,13 +16,14 @@ class InputArea extends React.Component {
         this.handleSend = this.handleSend.bind(this);
         this.handleSelectImage = this.handleSelectImage.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleExpression = this.handleExpression.bind(this);
     }
     
     render () {
         return (
             <div style={ styles.containner }>
                 <ExpressionForm isShow={ this.state.isShow } handleClick={ this.insertAtCursor }/>
-                <button style={ [styles.expression, styles.focus] } className="icon" title="表情" onClick={() => this.setState({isShow: !this.state.isShow})}>&#xe603;</button>
+                <button style={ [styles.expression, styles.focus] } className="icon" title="表情" onClick={ this.handleExpression }>&#xe603;</button>
                 <input style={ styles.selectImage } type="file" ref="image" accept="image/*" onChange={ this.handleSelectImage }/>
                 <button style={ [styles.image, styles.focus] } key="image" onClick={ () => this.refs.image.click() } className="icon" title="图片">&#xe600;</button>
                 <input type="text" style={ [styles.message, styles.focus] } ref="message" onKeyDown={ this.handleKeyDown } maxLength={ 512 } onFocus={() => this.setState({isShow: false})}/>
@@ -81,6 +83,13 @@ class InputArea extends React.Component {
             };
         }
         this.props.handleSend({text: message});
+    }
+    
+    handleExpression () {
+        this.setState({isShow: !this.state.isShow});
+        Once(document.body, 'click', () => {
+            this.setState({isShow: false});
+        });
     }
     
     handleSelectImage () {
