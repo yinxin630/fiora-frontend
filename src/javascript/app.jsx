@@ -185,26 +185,29 @@ export default class App extends React.Component {
         let token = window.localStorage.getItem('token');
         this.props.dispatch(Action.setToken(token));
         
-        io.socket.get('/user', {token}, (result, jwr) => {
-            if (jwr.statusCode === 200) {
-                io.sails.token = token;
-                
-                if (result.id.toString().startsWith('guest')) {
-                    notification['info']({
-                        message: '提示',
-                        description: '您正在以游客的身份登录聊天室, 游客的消息记录/昵称/头像不会被保存, 欢迎注册帐号使用',
-                        duration: 8,
-                    });
+        io.socket.on('connect', () => {
+            console.log('连接');
+            io.socket.get('/user', {token}, (result, jwr) => {
+                if (jwr.statusCode === 200) {
+                    io.sails.token = token;
+                    
+                    if (result.id.toString().startsWith('guest')) {
+                        notification['info']({
+                            message: '提示',
+                            description: '您正在以游客的身份登录聊天室, 游客的消息记录/昵称/头像不会被保存, 欢迎注册帐号使用',
+                            duration: 8,
+                        });
+                    }
+                    
+                    this.props.dispatch(Action.setUser(result));
+                    this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
+                    this.props.dispatch(Action.setLoginStatus(!result.id.toString().startsWith('guest')));
                 }
-                
-                this.props.dispatch(Action.setUser(result));
-                this.props.dispatch(Action.setCurrentLinkman(result.groups[0], true));
-                this.props.dispatch(Action.setLoginStatus(!result.id.toString().startsWith('guest')));
-            }
-            else {
-                this.props.dispatch(Action.setUser(undefined));
-                this.props.dispatch(Action.setLoginStatus(false));
-            }
+                else {
+                    this.props.dispatch(Action.setUser(undefined));
+                    this.props.dispatch(Action.setLoginStatus(false));
+                }
+            });
         });
         
         io.socket.on('message', result => {
