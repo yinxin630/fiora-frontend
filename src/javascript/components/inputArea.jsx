@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Radium from 'radium';
+import Ezreal from 'ezreal';
 import ExpressionForm from './expressionForm.jsx';
 const Once = require('once-event-listener');
 
@@ -23,7 +24,10 @@ class InputArea extends React.Component {
     render () {
         return (
             <div style={ styles.containner }>
-                <ExpressionForm isShow={ this.state.isShow } handleClick={ this.insertAtCursor }/>
+                <Ezreal display={ this.state.isShow } type="scale-enter-leave">
+                    <ExpressionForm isShow={ true } handleClick={ this.insertAtCursor }/>
+                </Ezreal>
+                
                 <button style={ [styles.expression, styles.focus] } className="icon" title="表情" onClick={ this.handleExpression }>&#xe603;</button>
                 <input style={ styles.selectImage } type="file" ref="image" accept="image/*" onChange={ this.handleSelectImage }/>
                 <button style={ [styles.image, styles.focus] } key="image" onClick={ () => this.refs.image.click() } className="icon" title="图片">&#xe600;</button>
