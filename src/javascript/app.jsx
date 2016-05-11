@@ -186,7 +186,6 @@ export default class App extends React.Component {
         this.props.dispatch(Action.setToken(token));
         
         io.socket.on('connect', () => {
-            console.log('连接');
             io.socket.get('/user', {token}, (result, jwr) => {
                 if (jwr.statusCode === 200) {
                     io.sails.token = token;

@@ -17,6 +17,7 @@ class InputArea extends React.Component {
         this.handleSelectImage = this.handleSelectImage.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleExpression = this.handleExpression.bind(this);
+        this.handlePaste = this.handlePaste.bind(this);
     }
     
     render () {
@@ -26,7 +27,7 @@ class InputArea extends React.Component {
                 <button style={ [styles.expression, styles.focus] } className="icon" title="表情" onClick={ this.handleExpression }>&#xe603;</button>
                 <input style={ styles.selectImage } type="file" ref="image" accept="image/*" onChange={ this.handleSelectImage }/>
                 <button style={ [styles.image, styles.focus] } key="image" onClick={ () => this.refs.image.click() } className="icon" title="图片">&#xe600;</button>
-                <input type="text" style={ [styles.message, styles.focus] } ref="message" onKeyDown={ this.handleKeyDown } maxLength={ 512 } onFocus={() => this.setState({isShow: false})}/>
+                <input type="text" style={ [styles.message, styles.focus] } ref="message" onKeyDown={ this.handleKeyDown } maxLength={ 512 } onFocus={() => this.setState({isShow: false})} onPaste={ this.handlePaste }/>
                 <button style={ [styles.send, styles.focus] } className="icon" ref="send" title="发送" onClick={ this.handleSend }>&#xe602;</button>
             </div>
         );
@@ -119,6 +120,36 @@ class InputArea extends React.Component {
         if (e.keyCode === 13 && !e.shiftKey) {
             e.preventDefault();
             this.refs.send.click();
+        }
+    }
+    
+    handlePaste (e) {
+        const { handleImage } = this.props;
+        
+        let items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        
+        // 如果包含文件内容
+        if (e.clipboardData.types.indexOf('Files') > -1) {
+            for (let index = 0; index < items.length; index++) {
+                let item = items[index];
+                if (item.kind === 'file' && item.type.match(/^image/)) {
+                    let reader = new FileReader();
+                    reader.onloadend = function() {
+                        let img = new Image();
+                        img.src = this.result;
+                        
+                        return img.onload = () => {
+                            return handleImage({
+                                image: this.result,
+                                width: img.width,
+                                height: img.height
+                            });
+                        };
+                    };
+                    reader.readAsDataURL(item.getAsFile());
+                }
+            }
+            e.preventDefault();
         }
     }
 }
