@@ -75,8 +75,7 @@ export default class Login extends React.Component {
                         onClick={ () => {
                             let username = this.refs.username.refs.input.value;
                             let password = this.refs.password.refs.input.value;
-                            let remembered = this.refs.remembered.refs.input.checked;
-                            if (!this.checkValue.bind(this)(username, password, remembered)) {
+                            if (!this.checkValue.bind(this)(username, password)) {
                                 return;
                             }
                             handleLogin(username, password, this);
