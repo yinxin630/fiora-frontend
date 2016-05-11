@@ -67,11 +67,6 @@ export default class Login extends React.Component {
                              validateStatus={ this.state.password }>
                             <Input type="password" ref="password" placeholder="密码" onKeyDown={ e => { if(e.keyCode === 13) this.refs.send.props.onClick(); }}/>
                         </FormItem>
-                        <FormItem
-                            {...checkboxItemLayout}
-                            label="记住密码">
-                            <Input type="checkbox" ref="remembered"/>
-                        </FormItem>
                     </Form>
                     <Button 
                         amStyle="primary" 
