@@ -17,6 +17,10 @@ function reducer(state = {
         state.user.avatar = action.user.avatar;
         return Object.assign({}, state);
     }
+    case Action.types.SetUserAvatar: {
+        state.user.avatar = action.avatar;
+        return Object.assign({}, state);
+    }
     case Action.types.AddLinkman: {
         if (!state.user.linkmans.find(x => x.id === action.user.id)) {
             action.user.messages = action.user.messages || [];

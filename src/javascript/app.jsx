@@ -4,7 +4,7 @@ const React = require('react');
 const ReactDom = require('react-dom');
 import { Provider, connect } from 'react-redux';
 const Action = require('./actions/common.js');
-const Store = require('./stores/pc.js');
+const Store = require('./stores/common.js');
 import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
 import { message, notification } from 'antd';
 require('html5-desktop-notifications');
@@ -72,22 +72,14 @@ export default class App extends React.Component {
     }
     
     handleSetting (avatar) {
-        if (!this.props.reducer.isLogged) {
-            let user = this.props.reducer.user;
-            if (avatar !== '') {
-                user.avatar = avatar;
-            }
-            
-            this.context.router.push('/');
-            return this.props.dispatch(Action.setUser(user));
+        if (avatar === '') {
+            return;
         }
-        
-        io.socket.put('/user/0', {token: io.sails.token, avatar}, (result, jwr) => {
-            if (jwr.statusCode === 200) {
-                this.context.router.push('/');
-                return this.props.dispatch(Action.setUserInfo(result));
-            }
-            this.props.dispatch(Action.setUser(undefined));
+        this.props.setting(this.props.reducer.isLogged, avatar).then(result => {
+            this.context.router.push('/');
+            // if (this.props.reducer.isLogged) {
+            //     window.location.reload();
+            // }
         });
     }
     
@@ -299,7 +291,8 @@ const mapActionToProps = dispatch => {
         dispatch: dispatch,
         login: (username, password) => Action.login(dispatch, username, password, io),
         logout: () => Action.logout(dispatch, io),
-        register: (username, password) => Action.register(dispatch, username, password, io)
+        register: (username, password) => Action.register(dispatch, username, password, io),
+        setting: (isLogged, avatar) => Action.setting(dispatch, isLogged, avatar, io)
     };
 };
 

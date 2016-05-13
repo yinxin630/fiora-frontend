@@ -5,6 +5,7 @@ module.exports = {
         SetToken: 'SetToken',
         SetUser: 'SetUser',
         SetUserInfo: 'SetUserInfo',
+        SetUserAvatar: 'SetUserAvatar',
         AddLinkman: 'AddLinkman',
         SetCurrentLinkman: 'SetCurrentLinkman',
         SetLoginStatus: 'SetLoginStatus',
@@ -43,6 +44,23 @@ module.exports = {
             io.socket.post('/user', {username, password}, (result, jwr) => {
                 resolve({ status: jwr.statusCode, data: result });
             });
+        } );
+    },
+    
+    setting: function (dispatch, isLogged, avatar, io) {
+        return new Promise( resolve => {
+            if (isLogged) {
+                io.socket.put('/user/0', {token: io.sails.token, avatar}, (result, jwr) => {
+                    if (jwr.statusCode === 200) {
+                        setTimeout(() => dispatch({ type: this.types.SetUserAvatar, avatar: result.avatar }), 1500);
+                    }
+                    resolve({ status: jwr.statusCode, data: result });
+                });
+            }
+            else {
+                dispatch({ type: this.types.SetUserAvatar, avatar: avatar });
+                resolve({ status: 200 });
+            }
         } );
     },
     
