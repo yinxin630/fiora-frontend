@@ -61,7 +61,7 @@ export default class App extends React.Component {
     
     handleRegister (username, password) {
         this.props.register(username, password).then(result => {
-            if (result.statusCode === 201) {
+            if (result.status === 201) {
                 message.info('注册成功, 请登录');
                 this.context.router.push('/login');
             }
@@ -77,9 +77,6 @@ export default class App extends React.Component {
         }
         this.props.setting(this.props.reducer.isLogged, avatar).then(result => {
             this.context.router.push('/');
-            // if (this.props.reducer.isLogged) {
-            //     window.location.reload();
-            // }
         });
     }
     
@@ -91,28 +88,11 @@ export default class App extends React.Component {
         if (!content || content.text === '') {
             return;
         }
-        
-        let user = this.props.reducer.user;
-        return io.socket.post('/message', {
-                token: io.sails.token,
-                isToGroup: isToGroup,
-                from: {
-                    id: user.id,
-                    username: user.username,
-                    avatar: user.avatar
-                },
-                to: linkman.id,
-                content: content,
-                type: type,
-            }, (result, jwr) => {
-                if (result.msg === 'user not online') {
-                    message.warn('对方不在线');
-                }
-                if (result.toUser) {
-                    this.props.dispatch(Action.addUserMessage(result.toUser, result));
-                }
-             }
-        );
+        this.props.send(this.props.reducer.user, content, type, linkman, isToGroup).then(result => {
+            if (result.data.msg === 'user not online') {
+                message.warn('对方不在线');
+            }
+        });
     }
     
     handleComment (content) {
@@ -292,7 +272,8 @@ const mapActionToProps = dispatch => {
         login: (username, password) => Action.login(dispatch, username, password, io),
         logout: () => Action.logout(dispatch, io),
         register: (username, password) => Action.register(dispatch, username, password, io),
-        setting: (isLogged, avatar) => Action.setting(dispatch, isLogged, avatar, io)
+        setting: (isLogged, avatar) => Action.setting(dispatch, isLogged, avatar, io),
+        send: (user, content, type, linkman, isToGroup) => Action.send(dispatch, user, content, type, linkman, isToGroup, io)
     };
 };
 

@@ -63,6 +63,28 @@ module.exports = {
         } );
     },
     
+    send: function (dispatch, user, content, type, linkman, isToGroup, io) {
+        return new Promise( resolve => {
+            io.socket.post('/message', {
+                token: io.sails.token,
+                isToGroup: isToGroup,
+                from: {
+                    id: user.id,
+                    username: user.username,
+                    avatar: user.avatar
+                },
+                to: linkman.id,
+                content: content,
+                type: type,
+            }, (result, jwr) => {
+                if (result.toUser) {
+                    dispatch({ type: this.types.AddUserMessage, user: result.toUser, message: result });
+                }
+                resolve({ status: jwr.statusCode, data: result });
+            });
+        } );
+    },
+    
     setToken: function (token) {
         return {
             type: this.types.SetToken,
