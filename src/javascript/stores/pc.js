@@ -1,6 +1,6 @@
 'use strict';
 
-const Action = require('./action.js');
+const Action = require('../actions/common.js');
 import { combineReducers, createStore } from 'redux';
 
 function reducer(state = {

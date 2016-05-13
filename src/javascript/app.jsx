@@ -3,8 +3,8 @@
 const React = require('react');
 const ReactDom = require('react-dom');
 import { Provider, connect } from 'react-redux';
-const Action = require('./action.js');
-const Store = require('./store.js');
+const Action = require('./actions/common.js');
+const Store = require('./stores/pc.js');
 import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
 import { message, notification } from 'antd';
 require('html5-desktop-notifications');
