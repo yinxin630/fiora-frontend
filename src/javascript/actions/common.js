@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = {
     types: {
         SetToken: 'SetToken',
@@ -17,6 +19,16 @@ module.exports = {
         return new Promise( resolve => {
             io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
                 dispatch({ type: this.types.SetLoginStatus, status: jwr.statusCode === 201 });
+                resolve({ status: jwr.statusCode, data: result });
+            });
+        } );
+    },
+    
+    logout: function (dispatch, io) {
+        return new Promise( resolve => {
+            io.socket.delete('/auth', {token: io.sails.token}, (result, jwr) => {
+                dispatch({ type: this.types.SetLoginStatus, status: false });
+                dispatch({ type: this.types.SetUser, user: undefined });
                 resolve({ status: jwr.statusCode, data: result });
             });
         } );

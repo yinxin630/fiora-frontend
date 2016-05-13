@@ -55,9 +55,7 @@ export default class App extends React.Component {
     }
     
     handleLogout () {
-        io.socket.delete('/auth', {token: io.sails.token}, (result, jwr) => {
-            this.props.dispatch(Action.setLoginStatus(false));
-            this.props.dispatch(Action.setUser(undefined));
+        this.props.logout().then(result => {
             io.sails.token = null;
             window.location.reload();
         });
@@ -301,7 +299,8 @@ export default class App extends React.Component {
 const mapActionToProps = dispatch => {
     return {
         dispatch: dispatch,
-        login: (username, password) => Action.login(dispatch, username, password, io)
+        login: (username, password) => Action.login(dispatch, username, password, io),
+        logout: () => Action.logout(dispatch, io)
     };
 };
 
