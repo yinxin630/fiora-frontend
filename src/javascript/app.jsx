@@ -37,7 +37,6 @@ export default class App extends React.Component {
     handleLogin (username, password) {
         this.props.login(username, password).then(result => {
             if (result.status === 201) {
-                io.sails.token = result.data.token;
                 window.localStorage.setItem('token', result.data.token);
                 this.context.router.push('/');
             }
@@ -56,7 +55,6 @@ export default class App extends React.Component {
     
     handleLogout () {
         this.props.logout().then(result => {
-            io.sails.token = null;
             window.location.reload();
         });
     }

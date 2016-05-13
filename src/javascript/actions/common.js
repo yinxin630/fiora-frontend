@@ -18,6 +18,9 @@ module.exports = {
     login: function (dispatch, username, password, io) {
         return new Promise( resolve => {
             io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
+                if (jwr.statusCode === 201) {
+                    io.sails.token = result.token;
+                }
                 dispatch({ type: this.types.SetLoginStatus, status: jwr.statusCode === 201 });
                 resolve({ status: jwr.statusCode, data: result });
             });
@@ -27,6 +30,7 @@ module.exports = {
     logout: function (dispatch, io) {
         return new Promise( resolve => {
             io.socket.delete('/auth', {token: io.sails.token}, (result, jwr) => {
+                io.sails.token = undefined;
                 dispatch({ type: this.types.SetLoginStatus, status: false });
                 dispatch({ type: this.types.SetUser, user: undefined });
                 resolve({ status: jwr.statusCode, data: result });
