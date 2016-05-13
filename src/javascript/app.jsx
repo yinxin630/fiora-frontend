@@ -59,9 +59,9 @@ export default class App extends React.Component {
         });
     }
     
-    handleRegister (username, password, component) {
-        io.socket.post('/user', {username: username, password}, (result, jwr) => {
-            if (jwr.statusCode === 201) {
+    handleRegister (username, password) {
+        this.props.register(username, password).then(result => {
+            if (result.statusCode === 201) {
                 message.info('注册成功, 请登录');
                 this.context.router.push('/login');
             }
@@ -298,7 +298,8 @@ const mapActionToProps = dispatch => {
     return {
         dispatch: dispatch,
         login: (username, password) => Action.login(dispatch, username, password, io),
-        logout: () => Action.logout(dispatch, io)
+        logout: () => Action.logout(dispatch, io),
+        register: (username, password) => Action.register(dispatch, username, password, io)
     };
 };
 

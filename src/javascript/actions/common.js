@@ -38,6 +38,14 @@ module.exports = {
         } );
     },
     
+    register: function (dispatch, username, password, io) {
+        return new Promise( resolve => {
+            io.socket.post('/user', {username, password}, (result, jwr) => {
+                resolve({ status: jwr.statusCode, data: result });
+            });
+        } );
+    },
+    
     setToken: function (token) {
         return {
             type: this.types.SetToken,
