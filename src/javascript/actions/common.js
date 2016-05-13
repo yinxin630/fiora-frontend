@@ -4,7 +4,6 @@ module.exports = {
     types: {
         SetToken: 'SetToken',
         SetUser: 'SetUser',
-        SetUserInfo: 'SetUserInfo',
         SetUserAvatar: 'SetUserAvatar',
         AddLinkman: 'AddLinkman',
         SetCurrentLinkman: 'SetCurrentLinkman',
@@ -74,13 +73,6 @@ module.exports = {
     setUser: function (user) {
         return {
             type: this.types.SetUser,
-            user: user
-        };
-    },
-    
-    setUserInfo: function (user) {
-        return {
-            type: this.types.SetUserInfo,
             user: user
         };
     },

@@ -13,10 +13,6 @@ function reducer(state = {
     case Action.types.SetUser: {
         return Object.assign({}, state, {user: action.user});
     }
-    case Action.types.SetUserInfo: {
-        state.user.avatar = action.user.avatar;
-        return Object.assign({}, state);
-    }
     case Action.types.SetUserAvatar: {
         state.user.avatar = action.avatar;
         return Object.assign({}, state);
