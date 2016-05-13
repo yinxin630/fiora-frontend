@@ -35,25 +35,23 @@ export default class App extends React.Component {
     }
     
     handleLogin (username, password) {
-        io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
-                if (jwr.statusCode === 201) {
-                    io.sails.token = result.token;
-                    window.localStorage.setItem('token', result.token);
-                    this.context.router.push('/');
-                }
-                else {
-                    if (result.msg.match(/user.*not exists/)) {
-                        message.warn('该用户不存在');
-                        return;
-                    }
-                    else if (result.msg.match(/password not correct/)) {
-                        message.warn('密码错误');
-                        return;
-                    }
-                }
-                this.props.dispatch(Action.setLoginStatus(jwr.statusCode === 201));
+        this.props.login(username, password).then(result => {
+            if (result.status === 201) {
+                io.sails.token = result.data.token;
+                window.localStorage.setItem('token', result.data.token);
+                this.context.router.push('/');
             }
-        );
+            else {
+                if (result.msg.match(/user.*not exists/)) {
+                    message.warn('该用户不存在');
+                    return;
+                }
+                else if (result.msg.match(/password not correct/)) {
+                    message.warn('密码错误');
+                    return;
+                }
+            }
+        });
     }
     
     handleLogout () {
@@ -300,7 +298,14 @@ export default class App extends React.Component {
     }
 }
 
-const ConnectedApp = connect(state => state)(App);
+const mapActionToProps = dispatch => {
+    return {
+        dispatch: dispatch,
+        login: (username, password) => Action.login(dispatch, username, password, io)
+    };
+};
+
+const ConnectedApp = connect(state => state, mapActionToProps)(App);
 
 ReactDom.render(
     <Provider store={ Store }>

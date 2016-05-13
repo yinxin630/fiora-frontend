@@ -13,6 +13,15 @@ module.exports = {
         ToggleNotification: 'ToggleNotification',
     },
     
+    login: function (dispatch, username, password, io) {
+        return new Promise( resolve => {
+            io.socket.post('/auth', {username, password, token: io.sails.token}, (result, jwr) => {
+                dispatch({ type: this.types.SetLoginStatus, status: jwr.statusCode === 201 });
+                resolve({ status: jwr.statusCode, data: result });
+            });
+        } );
+    },
+    
     setToken: function (token) {
         return {
             type: this.types.SetToken,
